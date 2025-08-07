@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Search Consent Management</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .consent-form {
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .enterprise-info {
+            background: #e8f4fd;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .cost-estimate {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .budget-status {
+            background: #d4edfd;
+            border: 1px solid #bee5eb;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .compliance-notice {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #721c24;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .consent-status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .status-success {
+            background: #d1edcc;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .status-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .status-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        .audit-trail {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .audit-event {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 Web Search Consent Management</h1>
+            <p>Enterprise-grade consent verification for web search operations</p>
+        </div>
+
+        <div class="enterprise-info">
+            <strong>🏢 Enterprise Account Features:</strong>
+            <ul>
+                <li>Double confirmation required for all web searches</li>
+                <li>Complete audit trail for compliance</li>
+                <li>Cost center allocation and budget controls</li>
+                <li>Admin approval for high-cost searches (>₹5.00)</li>
+            </ul>
+        </div>
+
+        <form class="consent-form" id="consentForm">
+            <div class="form-group">
+                <label for="userId">User ID *</label>
+                <input type="text" id="userId" name="userId" required 
+                       placeholder="Enter your user ID" value="enterprise_user_demo">
+            </div>
+
+            <div class="form-group">
+                <label for="searchQuery">Search Query *</label>
+                <textarea id="searchQuery" name="searchQuery" required 
+                          placeholder="Enter your search query">latest AI developments in machine learning 2025</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="searchMode">Search Mode</label>
+                <select id="searchMode" name="searchMode">
+                    <option value="research">Research Mode (₹0.50-1.50, <3s)</option>
+                    <option value="deep_dive">Deep Dive Mode (₹1.50-3.00, <8s)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="costCenter">Cost Center</label>
+                <input type="text" id="costCenter" name="costCenter" 
+                       placeholder="e.g., IT-RESEARCH-2025">
+            </div>
+
+            <div class="form-group">
+                <label for="budgetLimit">Budget Limit (₹)</label>
+                <input type="number" id="budgetLimit" name="budgetLimit" 
+                       min="0.5" max="10" step="0.1" value="2.0">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="enterpriseAccount" name="enterpriseAccount" checked>
+                <label for="enterpriseAccount">Enterprise Account (requires double confirmation)</label>
+            </div>
+
+            <div class="cost-estimate" id="costEstimate">
+                <strong>💰 Estimated Cost:</strong> ₹<span id="estimatedCost">1.20</span>
+                <br><small>Based on search mode and query complexity</small>
+            </div>
+
+            <div class="budget-status" id="budgetStatus">
+                <strong>📊 Budget Status:</strong>
+                <br>Daily Used: ₹<span id="dailyUsed">3.50</span> / ₹<span id="dailyLimit">25.00</span>
+                <br>Remaining: ₹<span id="remaining">21.50</span>
+            </div>
+
+            <button type="submit" class="btn" id="requestConsentBtn">
+                🔓 Request Web Search Consent
+            </button>
+        </form>
+
+        <div class="consent-status" id="consentStatus">
+            <div id="statusMessage"></div>
+            
+            <div id="doubleConfirmation" style="display: none; margin-top: 20px;">
+                <div class="compliance-notice">
+                    <strong>⚠️ Double Confirmation Required</strong>
+                    <p>Enterprise policy requires double confirmation for all web searches.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmationText">Confirmation Message</label>
+                    <textarea id="confirmationText" placeholder="Type: I understand the costs and scope of this web search"></textarea>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="understoodCosts">
+                    <label for="understoodCosts">I understand the estimated costs (₹<span id="confirmCost">1.20</span>)</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="understoodScope">
+                    <label for="understoodScope">I understand this will access external web sources</label>
+                </div>
+                
+                <button type="button" class="btn" id="confirmConsentBtn" disabled>
+                    ✅ Confirm Web Search Consent
+                </button>
+            </div>
+        </div>
+
+        <div class="audit-trail" id="auditTrail">
+            <h3>📋 Audit Trail</h3>
+            <div id="auditEvents">
+                <div class="audit-event">
+                    <strong>2025-07-31 10:15:23</strong> - Consent request initialized
+                    <br>User: enterprise_user_demo | Cost Center: IT-RESEARCH-2025
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1/web-search';
+        let currentConsentToken = null;
+
+        // Update cost estimate based on search mode
+        document.getElementById('searchMode').addEventListener('change', updateCostEstimate);
+        document.getElementById('searchQuery').addEventListener('input', updateCostEstimate);
+
+        function updateCostEstimate() {
+            const mode = document.getElementById('searchMode').value;
+            const query = document.getElementById('searchQuery').value;
+            
+            let baseCost = mode === 'deep_dive' ? 2.5 : 1.0;
+            
+            // Adjust for query complexity
+            if (query.length > 100) baseCost *= 1.2;
+            if (query.toLowerCase().includes('comprehensive') || query.toLowerCase().includes('detailed')) {
+                baseCost *= 1.3;
+            }
+            
+            const estimatedCost = Math.round(baseCost * 100) / 100;
+            document.getElementById('estimatedCost').textContent = estimatedCost.toFixed(2);
+            document.getElementById('confirmCost').textContent = estimatedCost.toFixed(2);
+        }
+
+        // Handle consent request
+        document.getElementById('consentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const requestData = {
+                user_id: formData.get('userId'),
+                search_query: formData.get('searchQuery'),
+                mode: formData.get('searchMode'),
+                enterprise_account: document.getElementById('enterpriseAccount').checked,
+                cost_center: formData.get('costCenter') || null,
+                budget_limit: parseFloat(formData.get('budgetLimit')),
+                session_id: 'web_ui_session_' + Date.now()
+            };
+
+            try {
+                document.getElementById('requestConsentBtn').disabled = true;
+                addAuditEvent('Requesting consent...', 'info');
+
+                const response = await fetch(`${API_BASE}/consent/request`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    currentConsentToken = result.consent_token;
+                    showConsentStatus(result, 'success');
+                    addAuditEvent(`Consent token received: ${result.consent_token}`, 'success');
+                    
+                    if (result.requires_double_confirmation) {
+                        document.getElementById('doubleConfirmation').style.display = 'block';
+                        setupDoubleConfirmation();
+                    }
+                } else {
+                    showConsentStatus({error: result.detail || 'Consent request failed'}, 'error');
+                    addAuditEvent(`Consent request failed: ${result.detail}`, 'error');
+                }
+            } catch (error) {
+                console.error('Consent request error:', error);
+                showConsentStatus({error: 'Network error during consent request'}, 'error');
+                addAuditEvent(`Network error: ${error.message}`, 'error');
+            } finally {
+                document.getElementById('requestConsentBtn').disabled = false;
+            }
+        });
+
+        function showConsentStatus(result, type) {
+            const statusDiv = document.getElementById('consentStatus');
+            const messageDiv = document.getElementById('statusMessage');
+            
+            statusDiv.className = `consent-status status-${type}`;
+            statusDiv.style.display = 'block';
+            
+            if (type === 'success') {
+                messageDiv.innerHTML = `
+                    <strong>✅ Consent Request Successful</strong><br>
+                    Token: <code>${result.consent_token}</code><br>
+                    Expires: ${new Date(result.expires_at).toLocaleString()}<br>
+                    Estimated Cost: ₹${result.estimated_cost}<br>
+                    Budget Remaining: ₹${result.budget_remaining}<br>
+                    ${result.requires_double_confirmation ? '<br><strong>⚠️ Double confirmation required below</strong>' : ''}
+                    ${result.admin_approval_required ? '<br><strong>👨‍💼 Admin approval required</strong>' : ''}
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <strong>❌ Consent Request Failed</strong><br>
+                    ${result.error}
+                `;
+            }
+        }
+
+        function setupDoubleConfirmation() {
+            const confirmBtn = document.getElementById('confirmConsentBtn');
+            const checkboxes = ['understoodCosts', 'understoodScope'];
+            const confirmationText = document.getElementById('confirmationText');
+            
+            function updateConfirmButton() {
+                const allChecked = checkboxes.every(id => document.getElementById(id).checked);
+                const hasText = confirmationText.value.length > 10;
+                confirmBtn.disabled = !(allChecked && hasText);
+            }
+            
+            checkboxes.forEach(id => {
+                document.getElementById(id).addEventListener('change', updateConfirmButton);
+            });
+            confirmationText.addEventListener('input', updateConfirmButton);
+            
+            confirmBtn.addEventListener('click', async () => {
+                try {
+                    confirmBtn.disabled = true;
+                    addAuditEvent('Submitting double confirmation...', 'info');
+                    
+                    const confirmationData = {
+                        consent_token: currentConsentToken,
+                        confirmation_text: confirmationText.value,
+                        understood_costs: document.getElementById('understoodCosts').checked,
+                        understood_scope: document.getElementById('understoodScope').checked
+                    };
+                    
+                    const response = await fetch(`${API_BASE}/consent/confirm`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(confirmationData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        addAuditEvent('✅ Double confirmation successful - Web search authorized!', 'success');
+                        document.getElementById('doubleConfirmation').innerHTML = `
+                            <div class="status-success" style="padding: 15px; border-radius: 4px;">
+                                <strong>🎉 Web Search Authorized!</strong><br>
+                                Status: ${result.status}<br>
+                                Consent Level: ${result.consent_level}<br>
+                                Valid Until: ${new Date(result.expires_at).toLocaleString()}<br>
+                                <br>
+                                <strong>You can now perform web searches with this consent token:</strong><br>
+                                <code style="background: #f8f9fa; padding: 5px; border-radius: 3px;">${currentConsentToken}</code>
+                            </div>
+                        `;
+                    } else {
+                        addAuditEvent(`❌ Confirmation failed: ${result.detail}`, 'error');
+                    }
+                } catch (error) {
+                    console.error('Confirmation error:', error);
+                    addAuditEvent(`Network error during confirmation: ${error.message}`, 'error');
+                } finally {
+                    confirmBtn.disabled = false;
+                }
+            });
+        }
+
+        function addAuditEvent(message, type) {
+            const auditEvents = document.getElementById('auditEvents');
+            const timestamp = new Date().toLocaleString();
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+            
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'audit-event';
+            eventDiv.innerHTML = `
+                <strong>${timestamp}</strong> - ${icon} ${message}
+            `;
+            
+            auditEvents.insertBefore(eventDiv, auditEvents.firstChild);
+        }
+
+        // Load user budget status on page load
+        window.addEventListener('load', async () => {
+            try {
+                const userId = document.getElementById('userId').value;
+                if (userId) {
+                    const response = await fetch(`${API_BASE}/consent/user/${userId}/status`);
+                    if (response.ok) {
+                        const result = await response.json();
+                        const data = result.data;
+                        
+                        document.getElementById('dailyUsed').textContent = data.daily_budget_used.toFixed(2);
+                        document.getElementById('dailyLimit').textContent = data.max_daily_budget.toFixed(2);
+                        document.getElementById('remaining').textContent = data.budget_remaining.toFixed(2);
+                    }
+                }
+            } catch (error) {
+                console.log('Could not load budget status:', error);
+            }
+            
+            updateCostEstimate();
+        });
+    </script>
+</body>
+</html>

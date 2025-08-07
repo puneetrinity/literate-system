@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "d792431c-0693-41f4-bf31-5b8c12cfd0aa",
+    "filename": "search_test.txt",
+    "content_type": ".txt",
+    "file_size": 427,
+    "metadata": {
+      "title": "search_test.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T09:42:35.878878",
+    "processed_date": "2025-07-20T09:42:35.878822",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Search Test Document for RAG System This is a simple test document to verify that the RAG search functionality is working correctly. Key features being tested: - Document upload and processing - Chunk generation and indexing - Semantic similarity search - Embedding generation and matching The system should be able to find this document when searching for terms like 'search test', 'RAG system', or 'document processing'.",
+  "chunks": [
+    {
+      "chunk_id": "a2e6cd14-465e-4ed5-807f-d5012fec4ee2",
+      "content": "Search Test Document for RAG System This is a simple test document to verify that the RAG search functionality is working correctly Key features being tested: - Document upload and processing - Chunk generation and indexing - Semantic similarity search - Embedding generation and matching The system should be able to find this document when searching for terms like 'search test', 'RAG system', or 'document processing'",
+      "metadata": {
+        "source_filename": "search_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "d792431c-0693-41f4-bf31-5b8c12cfd0aa",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T09:42:35.879371",
+      "embedding_shape": null
+    }
+  ]
+}

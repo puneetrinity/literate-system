@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "39e090ee-e768-40d4-a1a9-ab56375e0067",
+    "filename": "verify.txt",
+    "content_type": ".txt",
+    "file_size": 37,
+    "metadata": {
+      "title": "verify.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-17T13:47:45.171971",
+    "processed_date": "2025-07-17T13:47:45.171946",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Test upload content for verification",
+  "chunks": [
+    {
+      "chunk_id": "b1758b84-868c-46f2-8f07-2d33bdb24296",
+      "content": "Test upload content for verification",
+      "metadata": {
+        "source_filename": "verify.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "39e090ee-e768-40d4-a1a9-ab56375e0067",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T13:47:45.172209",
+      "embedding_shape": null
+    }
+  ]
+}

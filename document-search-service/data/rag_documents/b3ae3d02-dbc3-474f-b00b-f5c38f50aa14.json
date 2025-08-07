@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "b3ae3d02-dbc3-474f-b00b-f5c38f50aa14",
+    "filename": "Python Developer JD.docx",
+    "content_type": ".docx",
+    "file_size": 16427,
+    "metadata": {
+      "title": "Python Developer JD.docx",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-21T12:11:58.092113",
+    "processed_date": "2025-07-21T12:11:58.092070",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Error: Could not extract text from DOCX",
+  "chunks": [
+    {
+      "chunk_id": "5fbae3f9-dcf9-4ea6-a7e0-a10ea945f67a",
+      "content": "Error: Could not extract text from DOCX",
+      "metadata": {
+        "source_filename": "Python Developer JD.docx",
+        "source_content_type": ".docx",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "b3ae3d02-dbc3-474f-b00b-f5c38f50aa14",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T12:11:58.092454",
+      "embedding_shape": null
+    }
+  ]
+}

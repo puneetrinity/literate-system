@@ -1,0 +1,108 @@
+{
+  "document": {
+    "id": "ee9551c2-fa0a-42a6-ae24-1535f50d15cc",
+    "filename": "vector_databases.txt",
+    "content_type": ".txt",
+    "file_size": 1692,
+    "metadata": {
+      "title": "vector_databases.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-17T15:07:34.799793",
+    "processed_date": "2025-07-17T15:07:34.799753",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Vector Databases and Similarity Search Overview: Vector databases are specialized database systems designed to store, index, and search high-dimensional vector embeddings. These databases are essential for applications involving semantic search, recommendation systems, and similarity matching. Vector Embeddings: Vector embeddings are dense numerical representations of data (text, images, audio) in high-dimensional space. Word embeddings like Word2Vec, GloVe, and sentence embeddings from BERT capture semantic relationships between words and sentences. Indexing Algorithms: - FAISS (Facebook AI Similarity Search): Efficient similarity search and clustering of dense vectors - HNSW (Hierarchical Navigable Small World): Graph-based approximate nearest neighbor search - LSH (Locality-Sensitive Hashing): Probabilistic method for dimensionality reduction and fast approximate matching - IVF (Inverted File): Quantization-based indexing for large-scale vector search Distance Metrics: Common distance metrics include Euclidean distance, cosine similarity, Manhattan distance, and dot product. Cosine similarity is particularly effective for text embeddings as it measures angular distance regardless of magnitude. Applications: Vector databases power semantic search engines, product recommendation systems, image similarity search, document retrieval, and content-based filtering. They enable finding similar items based on meaning rather than exact keyword matches. Performance Optimization: Techniques like quantization, pruning, and hierarchical clustering improve search speed and reduce memory usage. Approximate methods trade slight accuracy for significant performance gains.",
+  "chunks": [
+    {
+      "chunk_id": "b1cba504-b489-46ff-bbf1-9696f545a7f5",
+      "content": "Vector Databases and Similarity Search Overview: Vector databases are specialized database systems designed to store, index, and search high-dimensional vector embeddings These databases are essential for applications involving semantic search, recommendation systems, and similarity matching Vector Embeddings: Vector embeddings are dense numerical representations of data (text, images, audio) in high-dimensional space",
+      "metadata": {
+        "source_filename": "vector_databases.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "ee9551c2-fa0a-42a6-ae24-1535f50d15cc",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:34.800229",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "1ec0d50e-d03b-48b3-810b-cc3cb2796560",
+      "content": "ta (text, images, audio) in high-dimensional space Word embeddings like Word2Vec, GloVe, and sentence embeddings from BERT capture semantic relationships between words and sentences",
+      "metadata": {
+        "source_filename": "vector_databases.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "ee9551c2-fa0a-42a6-ae24-1535f50d15cc",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:34.800253",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "29c8cd3b-149c-4578-8ea1-b0d06b404e46",
+      "content": "semantic relationships between words and sentences Indexing Algorithms: - FAISS (Facebook AI Similarity Search): Efficient similarity search and clustering of dense vectors - HNSW (Hierarchical Navigable Small World): Graph-based approximate nearest neighbor search - LSH (Locality-Sensitive Hashing): Probabilistic method for dimensionality reduction and fast approximate matching - IVF (Inverted File): Quantization-based indexing for large-scale vector search Distance Metrics: Common distance metrics include Euclidean distance, cosine similarity, Manhattan distance, and dot product",
+      "metadata": {
+        "source_filename": "vector_databases.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "ee9551c2-fa0a-42a6-ae24-1535f50d15cc",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:34.800271",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "33586b2e-2e8a-4142-84a4-937e58d62b04",
+      "content": "ne similarity, Manhattan distance, and dot product Cosine similarity is particularly effective for text embeddings as it measures angular distance regardless of magnitude Applications: Vector databases power semantic search engines, product recommendation systems, image similarity search, document retrieval, and content-based filtering They enable finding similar items based on meaning rather than exact keyword matches",
+      "metadata": {
+        "source_filename": "vector_databases.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "ee9551c2-fa0a-42a6-ae24-1535f50d15cc",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:34.800289",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "22e33175-ff65-4508-9a23-4922edee2ecf",
+      "content": "based on meaning rather than exact keyword matches Performance Optimization: Techniques like quantization, pruning, and hierarchical clustering improve search speed and reduce memory usage Approximate methods trade slight accuracy for significant performance gains",
+      "metadata": {
+        "source_filename": "vector_databases.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "ee9551c2-fa0a-42a6-ae24-1535f50d15cc",
+      "chunk_index": 4,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:34.800306",
+      "embedding_shape": null
+    }
+  ]
+}

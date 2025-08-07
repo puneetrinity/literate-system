@@ -1,0 +1,74 @@
+{
+  "document": {
+    "id": "7f8a1347-bfd0-40da-b3d6-01ff9001530e",
+    "filename": "177915_Payslip_May2024.pdf",
+    "content_type": ".pdf",
+    "file_size": 116683,
+    "metadata": {
+      "title": "177915_Payslip_May2024.pdf",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-21T12:19:56.055341",
+    "processed_date": "2025-07-21T12:19:56.055297",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "RingCentral Innovation (India) Private Limited Pay Slip for the Month of Ma y 2024 EMPCODE 177915 UAN NO 100464990414 EMPNAME Rajni Upadhyay PF NO PYBOM2478736000/0010129 DESIGNA TION Manager Marketing Automation STD DA YS 31.00 DOJ 01/07/2022 WRKDA YS 31.00 PAN ACBPU4724E LOP DA YS 0.00 DEPARTMENT 318 - Marketing Systems BANK NAME Axis Bank LOCA TION Gurugram ACCOUNT NO 91501005440051 1 PRAN NUMBER EARNINGS AMOUNT YTD Basic Pay 93390.00 186780.00 House Rent Allowance 46695.00 93390.00 Leave T ravel Allowance 12500.00 25000.00 Food Allowance 2200.00 4400.00 Vehicle Maintenance Reim 2400.00 4800.00 Driver Allowance 900.00 1800.00 Special Allowance 28694.00 57388.00 Night Shift Allowance 4669.00 9338.00 ESPP Refund 27793.00 27793.00 MBO 88190.00 88190.00 DEDUCTIONS AMOUNT YTD Food Allowance Deduction 2200.00 4400.00 Provident fund 11207.00 22414.00 Income T ax 59947.00 92379.00 Labour W elfare Fund 31.00 62.00 GROSS EARNINGS 307,431.00 498,879.00 GROSS DEDUCTION 73,385.00 119,255.00 NET P AY: 234,046.00 NET TRANSFER : 234,046.00 IN WORDS : Rupees T wo Lacs Thirty-Four Thousand Forty-Six Only This is a computer generated document, hence no signature is required.",
+  "chunks": [
+    {
+      "chunk_id": "48f95a5a-9a33-46bb-99cc-0f4975bcf645",
+      "content": "RingCentral Innovation (India) Private Limited Pay Slip for the Month of Ma y 2024 EMPCODE 177915 UAN NO 100464990414 EMPNAME Rajni Upadhyay PF NO PYBOM2478736000/0010129 DESIGNA TION Manager Marketing Automation STD DA YS 31 00 DOJ 01/07/2022 WRKDA YS 31 00 PAN ACBPU4724E LOP DA YS 0 00 DEPARTMENT 318 - Marketing Systems BANK NAME Axis Bank LOCA TION Gurugram ACCOUNT NO 91501005440051 1 PRAN NUMBER EARNINGS AMOUNT YTD Basic Pay 93390 00 186780 00 House Rent Allowance 46695 00 93390",
+      "metadata": {
+        "source_filename": "177915_Payslip_May2024.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "7f8a1347-bfd0-40da-b3d6-01ff9001530e",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T12:19:56.055868",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "37c59f70-5aac-4b8f-b313-7dd6faba18e6",
+      "content": "0 00 186780 00 House Rent Allowance 46695 00 93390 00 Leave T ravel Allowance 12500 00 25000 00 Food Allowance 2200 00 4400 00 Vehicle Maintenance Reim 2400 00 4800 00 Driver Allowance 900 00 1800 00 Special Allowance 28694 00 57388 00 Night Shift Allowance 4669 00 9338 00 ESPP Refund 27793 00 27793 00 MBO 88190 00 88190 00 DEDUCTIONS AMOUNT YTD Food Allowance Deduction 2200 00 4400 00 Provident fund 11207 00 22414 00 Income T ax 59947 00 92379 00 Labour W elfare Fund 31 00 62 00 GROSS EARNINGS 307,431 00 498,879",
+      "metadata": {
+        "source_filename": "177915_Payslip_May2024.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "7f8a1347-bfd0-40da-b3d6-01ff9001530e",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T12:19:56.055911",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "6d17454f-9faa-4280-8800-2e64f4b6f7f0",
+      "content": "Fund 31 00 62 00 GROSS EARNINGS 307,431 00 498,879 00 GROSS DEDUCTION 73,385 00 119,255 00 NET P AY: 234,046 00 NET TRANSFER : 234,046 00 IN WORDS : Rupees T wo Lacs Thirty-Four Thousand Forty-Six Only This is a computer generated document, hence no signature is required",
+      "metadata": {
+        "source_filename": "177915_Payslip_May2024.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "7f8a1347-bfd0-40da-b3d6-01ff9001530e",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T12:19:56.055931",
+      "embedding_shape": null
+    }
+  ]
+}

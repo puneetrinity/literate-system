@@ -1,0 +1,91 @@
+{
+  "document": {
+    "id": "7e99c5f5-5515-4842-8526-b0fc9ad5bd0d",
+    "filename": "test_document.txt",
+    "content_type": ".txt",
+    "file_size": 1438,
+    "metadata": {
+      "title": "test_document.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T13:21:09.378642",
+    "processed_date": "2025-07-20T13:21:09.378581",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Climate Change and Renewable Energy Solutions Climate change represents one of the most pressing challenges of our time. Rising global temperatures, caused primarily by greenhouse gas emissions from fossil fuel combustion, are leading to severe environmental consequences including melting ice caps, rising sea levels, and extreme weather events. Renewable energy technologies offer promising solutions to reduce carbon emissions. Solar photovoltaic systems can convert sunlight directly into electricity with increasing efficiency rates now exceeding 22% for commercial panels. Wind turbines harness kinetic energy from air movement, with modern offshore wind farms generating over 15 MW per turbine. Energy storage systems, particularly lithium-ion batteries, are crucial for managing the intermittent nature of renewable sources. Grid-scale battery installations can store excess energy during peak production and release it when demand is high. Smart grid technologies enable better integration of renewable energy sources by using advanced sensors and AI algorithms to balance supply and demand in real-time. These systems can automatically adjust energy distribution based on weather forecasts and consumption patterns. The transition to renewable energy requires significant investment but offers long-term economic benefits including job creation in green technologies and reduced dependence on volatile fossil fuel markets.",
+  "chunks": [
+    {
+      "chunk_id": "c94d92b4-5b1c-423b-8b73-4413307a5615",
+      "content": "Climate Change and Renewable Energy Solutions Climate change represents one of the most pressing challenges of our time Rising global temperatures, caused primarily by greenhouse gas emissions from fossil fuel combustion, are leading to severe environmental consequences including melting ice caps, rising sea levels, and extreme weather events Renewable energy technologies offer promising solutions to reduce carbon emissions",
+      "metadata": {
+        "source_filename": "test_document.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "7e99c5f5-5515-4842-8526-b0fc9ad5bd0d",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T13:21:09.380158",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "d8c51ac0-49ca-4764-ab77-6de32c3d79d5",
+      "content": "fer promising solutions to reduce carbon emissions Solar photovoltaic systems can convert sunlight directly into electricity with increasing efficiency rates now exceeding 22% for commercial panels Wind turbines harness kinetic energy from air movement, with modern offshore wind farms generating over 15 MW per turbine Energy storage systems, particularly lithium-ion batteries, are crucial for managing the intermittent nature of renewable sources",
+      "metadata": {
+        "source_filename": "test_document.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "7e99c5f5-5515-4842-8526-b0fc9ad5bd0d",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T13:21:09.380192",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "89ef3250-dc70-4638-8909-e90186ce2525",
+      "content": "aging the intermittent nature of renewable sources Grid-scale battery installations can store excess energy during peak production and release it when demand is high Smart grid technologies enable better integration of renewable energy sources by using advanced sensors and AI algorithms to balance supply and demand in real-time These systems can automatically adjust energy distribution based on weather forecasts and consumption patterns",
+      "metadata": {
+        "source_filename": "test_document.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "7e99c5f5-5515-4842-8526-b0fc9ad5bd0d",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T13:21:09.380213",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "bc638fc2-6348-49c5-9f25-e2abcdc84dcc",
+      "content": "ased on weather forecasts and consumption patterns The transition to renewable energy requires significant investment but offers long-term economic benefits including job creation in green technologies and reduced dependence on volatile fossil fuel markets",
+      "metadata": {
+        "source_filename": "test_document.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "7e99c5f5-5515-4842-8526-b0fc9ad5bd0d",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T13:21:09.380229",
+      "embedding_shape": null
+    }
+  ]
+}

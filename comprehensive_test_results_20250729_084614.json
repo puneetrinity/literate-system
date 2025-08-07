@@ -1,0 +1,213 @@
+{
+  "test_metadata": {
+    "timestamp": "2025-07-29T08:46:12.991836",
+    "endpoint": "http://localhost:8001/api/v2/search/ultra-fast",
+    "test_categories": 7
+  },
+  "health": {
+    "success": true,
+    "response_time_ms": 7.875204086303711,
+    "status": "healthy",
+    "details": {
+      "status": "healthy",
+      "message": "Ultra-Fast Search System with RAG is running",
+      "rag_system": {
+        "initialized": true,
+        "document_processor": true,
+        "document_chunker": true,
+        "document_store": true,
+        "rag_engine": true,
+        "components_healthy": true,
+        "rag_stats": {},
+        "database_accessible": true
+      }
+    },
+    "test_duration_seconds": 0.01
+  },
+  "basic": {
+    "success": true,
+    "total_queries": 5,
+    "successful_queries": 5,
+    "total_results_found": 15,
+    "average_response_time_ms": 6.37,
+    "success_rate_percent": 100.0,
+    "test_duration_seconds": 0.03
+  },
+  "search": {
+    "success": false,
+    "total_accuracy_tests": 3,
+    "successful_tests": 0,
+    "average_relevance_score": 0,
+    "accuracy_rate_percent": 0.0,
+    "detailed_results": [
+      {
+        "query": "python developer",
+        "results_count": 3,
+        "meets_minimum": true,
+        "relevance_score": 0.1111111111111111,
+        "success": false
+      },
+      {
+        "query": "machine learning engineer",
+        "results_count": 3,
+        "meets_minimum": true,
+        "relevance_score": 0.0,
+        "success": false
+      },
+      {
+        "query": "senior software engineer",
+        "results_count": 3,
+        "meets_minimum": true,
+        "relevance_score": 0.0,
+        "success": false
+      }
+    ],
+    "test_duration_seconds": 0.09
+  },
+  "performance": {
+    "success": false,
+    "error": "must have at least two data points",
+    "test_duration_seconds": 0
+  },
+  "concurrency": {
+    "success": true,
+    "total_concurrent_requests": 25,
+    "successful_requests": 25,
+    "concurrency_success_rate": 100.0,
+    "total_concurrent_duration": 0.7,
+    "concurrent_qps": 35.49,
+    "test_duration_seconds": 0.7
+  },
+  "edge": {
+    "success": true,
+    "total_edge_cases": 7,
+    "handled_gracefully": 7,
+    "graceful_handling_rate": 100.0,
+    "detailed_results": [
+      {
+        "description": "Empty query",
+        "query": "",
+        "status_code": 400,
+        "handled_gracefully": true
+      },
+      {
+        "description": "Whitespace only",
+        "query": "   ",
+        "status_code": 400,
+        "handled_gracefully": true
+      },
+      {
+        "description": "Single character",
+        "query": "a",
+        "status_code": 200,
+        "handled_gracefully": true,
+        "results_count": 3
+      },
+      {
+        "description": "Very long query",
+        "query": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...",
+        "status_code": 200,
+        "handled_gracefully": true,
+        "results_count": 3
+      },
+      {
+        "description": "Emoji query",
+        "query": "\ud83e\udd16\ud83d\udd0d\ud83d\udcbb",
+        "status_code": 200,
+        "handled_gracefully": true,
+        "results_count": 3
+      },
+      {
+        "description": "SQL injection attempt",
+        "query": "SELECT * FROM users",
+        "status_code": 200,
+        "handled_gracefully": true,
+        "results_count": 3
+      },
+      {
+        "description": "Path traversal attempt",
+        "query": "../../etc/passwd",
+        "status_code": 200,
+        "handled_gracefully": true,
+        "results_count": 3
+      }
+    ],
+    "test_duration_seconds": 0.17
+  },
+  "scalability": {
+    "success": true,
+    "scalability_results": [
+      {
+        "success": true,
+        "total_requests": 10,
+        "successful_requests": 10,
+        "success_rate_percent": 100.0,
+        "avg_response_time_ms": 20.67,
+        "p95_response_time_ms": 23.37,
+        "queries_per_second": 411.95,
+        "total_duration_seconds": 0.02,
+        "description": "Light load",
+        "request_count": 10
+      },
+      {
+        "success": true,
+        "total_requests": 25,
+        "successful_requests": 25,
+        "success_rate_percent": 100.0,
+        "avg_response_time_ms": 44.97,
+        "p95_response_time_ms": 49.06,
+        "queries_per_second": 479.73,
+        "total_duration_seconds": 0.05,
+        "description": "Medium load",
+        "request_count": 25
+      },
+      {
+        "success": true,
+        "total_requests": 50,
+        "successful_requests": 50,
+        "success_rate_percent": 100.0,
+        "avg_response_time_ms": 86.66,
+        "p95_response_time_ms": 92.42,
+        "queries_per_second": 492.33,
+        "total_duration_seconds": 0.1,
+        "description": "Heavy load",
+        "request_count": 50
+      },
+      {
+        "success": true,
+        "total_requests": 100,
+        "successful_requests": 100,
+        "success_rate_percent": 100.0,
+        "avg_response_time_ms": 158.97,
+        "p95_response_time_ms": 176.62,
+        "queries_per_second": 524.85,
+        "total_duration_seconds": 0.19,
+        "description": "Stress test",
+        "request_count": 100
+      }
+    ],
+    "max_successful_load": 100,
+    "test_duration_seconds": 0.37
+  },
+  "final_summary": {
+    "overall_success": false,
+    "total_test_categories": 7,
+    "successful_categories": 5,
+    "success_rate_percent": 71.4,
+    "key_metrics": {
+      "avg_response_time_ms": 0,
+      "search_success_rate": 0,
+      "accuracy_rate": 0,
+      "peak_qps": 0
+    },
+    "test_status_by_category": {
+      "health": "\u2705 PASSED",
+      "basic": "\u2705 PASSED",
+      "search": "\u274c FAILED",
+      "performance": "\u274c FAILED",
+      "concurrency": "\u2705 PASSED",
+      "edge": "\u2705 PASSED",
+      "scalability": "\u2705 PASSED"
+    }
+  }
+}

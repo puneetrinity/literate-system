@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-07-29 08:47:39 UTC",
+  "endpoint": "http://localhost:8001/api/v2/search/ultra-fast",
+  "results": [
+    {
+      "concurrent_users": 1,
+      "total_requests": 20,
+      "successful_requests": 20,
+      "success_rate": 100.0,
+      "total_duration": 0.06,
+      "requests_per_second": 345.4,
+      "avg_response_time": 2.74,
+      "median_response_time": 2.51,
+      "min_response_time": 2.4,
+      "max_response_time": 6.95,
+      "p95_response_time": 6.74,
+      "p99_response_time": 6.95
+    },
+    {
+      "concurrent_users": 5,
+      "total_requests": 50,
+      "successful_requests": 50,
+      "success_rate": 100.0,
+      "total_duration": 0.09,
+      "requests_per_second": 549.94,
+      "avg_response_time": 8.29,
+      "median_response_time": 8.15,
+      "min_response_time": 4.27,
+      "max_response_time": 16.51,
+      "p95_response_time": 15.43,
+      "p99_response_time": 16.51
+    },
+    {
+      "concurrent_users": 10,
+      "total_requests": 100,
+      "successful_requests": 100,
+      "success_rate": 100.0,
+      "total_duration": 0.16,
+      "requests_per_second": 622.73,
+      "avg_response_time": 14.52,
+      "median_response_time": 10.02,
+      "min_response_time": 5.13,
+      "max_response_time": 34.76,
+      "p95_response_time": 32.31,
+      "p99_response_time": 34.75
+    },
+    {
+      "concurrent_users": 20,
+      "total_requests": 200,
+      "successful_requests": 200,
+      "success_rate": 100.0,
+      "total_duration": 0.27,
+      "requests_per_second": 733.93,
+      "avg_response_time": 24.4,
+      "median_response_time": 18.83,
+      "min_response_time": 9.66,
+      "max_response_time": 67.37,
+      "p95_response_time": 62.76,
+      "p99_response_time": 65.74
+    },
+    {
+      "concurrent_users": 50,
+      "total_requests": 500,
+      "successful_requests": 500,
+      "success_rate": 100.0,
+      "total_duration": 0.6,
+      "requests_per_second": 838.12,
+      "avg_response_time": 52.46,
+      "median_response_time": 44.1,
+      "min_response_time": 23.31,
+      "max_response_time": 140.44,
+      "p95_response_time": 129.05,
+      "p99_response_time": 137.05
+    }
+  ]
+}

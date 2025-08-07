@@ -1,0 +1,449 @@
+name: CI/CD Notifications
+
+on:
+  workflow_run:
+    workflows: ["Unified AI System - Main CI Pipeline", "Deploy to RunPod", "Performance Regression Tests"]
+    types: [completed]
+  push:
+    tags: ['v*']
+  issues:
+    types: [opened, closed]
+  pull_request:
+    types: [opened, closed, merged]
+
+jobs:
+  # ================================
+  # Slack Notifications
+  # ================================
+  slack-notification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Determine notification content
+      id: content
+      run: |
+        # Determine the event type and set appropriate message
+        if [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+          WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
+          WORKFLOW_STATUS="${{ github.event.workflow_run.conclusion }}"
+          BRANCH="${{ github.event.workflow_run.head_branch }}"
+          
+          case "$WORKFLOW_STATUS" in
+            "success")
+              COLOR="good"
+              ICON="✅"
+              ;;
+            "failure")
+              COLOR="danger"
+              ICON="❌"
+              ;;
+            "cancelled")
+              COLOR="warning"
+              ICON="⚠️"
+              ;;
+            *)
+              COLOR="warning"
+              ICON="🔄"
+              ;;
+          esac
+          
+          echo "title=${ICON} ${WORKFLOW_NAME} - ${WORKFLOW_STATUS}" >> $GITHUB_OUTPUT
+          echo "color=${COLOR}" >> $GITHUB_OUTPUT
+          echo "message=Workflow '${WORKFLOW_NAME}' ${WORKFLOW_STATUS} on branch '${BRANCH}'" >> $GITHUB_OUTPUT
+          
+        elif [[ "${{ github.event_name }}" == "push" ]] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          echo "title=🚀 New Release: ${TAG_NAME}" >> $GITHUB_OUTPUT
+          echo "color=good" >> $GITHUB_OUTPUT
+          echo "message=New version ${TAG_NAME} has been tagged and is ready for deployment" >> $GITHUB_OUTPUT
+          
+        elif [[ "${{ github.event_name }}" == "issues" ]]; then
+          ISSUE_ACTION="${{ github.event.action }}"
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_NUMBER="${{ github.event.issue.number }}"
+          
+          if [[ "$ISSUE_ACTION" == "opened" ]]; then
+            echo "title=🐛 New Issue #${ISSUE_NUMBER}" >> $GITHUB_OUTPUT
+            echo "color=warning" >> $GITHUB_OUTPUT
+            echo "message=New issue opened: ${ISSUE_TITLE}" >> $GITHUB_OUTPUT
+          elif [[ "$ISSUE_ACTION" == "closed" ]]; then
+            echo "title=✅ Issue Closed #${ISSUE_NUMBER}" >> $GITHUB_OUTPUT
+            echo "color=good" >> $GITHUB_OUTPUT
+            echo "message=Issue resolved: ${ISSUE_TITLE}" >> $GITHUB_OUTPUT
+          fi
+          
+        elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          PR_ACTION="${{ github.event.action }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          
+          case "$PR_ACTION" in
+            "opened")
+              echo "title=🔀 New Pull Request #${PR_NUMBER}" >> $GITHUB_OUTPUT
+              echo "color=#36a64f" >> $GITHUB_OUTPUT
+              echo "message=New PR opened: ${PR_TITLE}" >> $GITHUB_OUTPUT
+              ;;
+            "closed")
+              if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+                echo "title=✅ PR Merged #${PR_NUMBER}" >> $GITHUB_OUTPUT
+                echo "color=good" >> $GITHUB_OUTPUT
+                echo "message=PR merged: ${PR_TITLE}" >> $GITHUB_OUTPUT
+              else
+                echo "title=❌ PR Closed #${PR_NUMBER}" >> $GITHUB_OUTPUT
+                echo "color=danger" >> $GITHUB_OUTPUT
+                echo "message=PR closed without merge: ${PR_TITLE}" >> $GITHUB_OUTPUT
+              fi
+              ;;
+          esac
+        fi
+        
+    - name: Send Slack notification
+      if: steps.content.outputs.title && secrets.SLACK_WEBHOOK_URL
+      uses: 8398a7/action-slack@v3
+      with:
+        status: custom
+        custom_payload: |
+          {
+            "attachments": [{
+              "color": "${{ steps.content.outputs.color }}",
+              "title": "${{ steps.content.outputs.title }}",
+              "text": "${{ steps.content.outputs.message }}",
+              "fields": [
+                {
+                  "title": "Repository",
+                  "value": "${{ github.repository }}",
+                  "short": true
+                },
+                {
+                  "title": "Commit",
+                  "value": "${{ github.sha }}",
+                  "short": true
+                },
+                {
+                  "title": "Actor",
+                  "value": "${{ github.actor }}",
+                  "short": true
+                },
+                {
+                  "title": "Ref",
+                  "value": "${{ github.ref }}",
+                  "short": true
+                }
+              ],
+              "actions": [
+                {
+                  "type": "button",
+                  "text": "View Details",
+                  "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                }
+              ],
+              "footer": "GitHub Actions",
+              "ts": ${{ github.event.head_commit.timestamp }}
+            }]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # ================================
+  # Discord Notifications
+  # ================================
+  discord-notification:
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    if: always() && secrets.DISCORD_WEBHOOK_URL
+    
+    steps:
+    - name: Determine Discord message
+      id: discord-content
+      run: |
+        # Set Discord-specific formatting
+        if [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+          WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
+          WORKFLOW_STATUS="${{ github.event.workflow_run.conclusion }}"
+          BRANCH="${{ github.event.workflow_run.head_branch }}"
+          
+          case "$WORKFLOW_STATUS" in
+            "success")
+              COLOR="65280"  # Green
+              TITLE="✅ Workflow Success"
+              ;;
+            "failure")
+              COLOR="16711680"  # Red
+              TITLE="❌ Workflow Failed"
+              ;;
+            "cancelled")
+              COLOR="16776960"  # Yellow
+              TITLE="⚠️ Workflow Cancelled"
+              ;;
+            *)
+              COLOR="8421504"  # Gray
+              TITLE="🔄 Workflow ${WORKFLOW_STATUS}"
+              ;;
+          esac
+          
+          DESCRIPTION="**${WORKFLOW_NAME}** ${WORKFLOW_STATUS} on branch \`${BRANCH}\`"
+          
+        elif [[ "${{ github.event_name }}" == "push" ]] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          COLOR="65280"  # Green
+          TITLE="🚀 New Release"
+          DESCRIPTION="Version **${TAG_NAME}** has been released!"
+          
+        elif [[ "${{ github.event_name }}" == "issues" ]]; then
+          ISSUE_ACTION="${{ github.event.action }}"
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_NUMBER="${{ github.event.issue.number }}"
+          
+          if [[ "$ISSUE_ACTION" == "opened" ]]; then
+            COLOR="16776960"  # Yellow
+            TITLE="🐛 New Issue"
+            DESCRIPTION="Issue #${ISSUE_NUMBER}: **${ISSUE_TITLE}**"
+          elif [[ "$ISSUE_ACTION" == "closed" ]]; then
+            COLOR="65280"  # Green
+            TITLE="✅ Issue Resolved"
+            DESCRIPTION="Issue #${ISSUE_NUMBER} closed: **${ISSUE_TITLE}**"
+          fi
+          
+        elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          PR_ACTION="${{ github.event.action }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          
+          case "$PR_ACTION" in
+            "opened")
+              COLOR="3447003"  # Blue
+              TITLE="🔀 New Pull Request"
+              DESCRIPTION="PR #${PR_NUMBER}: **${PR_TITLE}**"
+              ;;
+            "closed")
+              if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+                COLOR="65280"  # Green
+                TITLE="✅ PR Merged"
+                DESCRIPTION="PR #${PR_NUMBER} merged: **${PR_TITLE}**"
+              else
+                COLOR="16711680"  # Red
+                TITLE="❌ PR Closed"
+                DESCRIPTION="PR #${PR_NUMBER} closed: **${PR_TITLE}**"
+              fi
+              ;;
+          esac
+        fi
+        
+        echo "color=${COLOR}" >> $GITHUB_OUTPUT
+        echo "title=${TITLE}" >> $GITHUB_OUTPUT
+        echo "description=${DESCRIPTION}" >> $GITHUB_OUTPUT
+        
+    - name: Send Discord notification
+      if: steps.discord-content.outputs.title
+      run: |
+        curl -H "Content-Type: application/json" \
+             -X POST \
+             -d "{
+               \"embeds\": [
+                 {
+                   \"title\": \"${{ steps.discord-content.outputs.title }}\",
+                   \"description\": \"${{ steps.discord-content.outputs.description }}\",
+                   \"color\": ${{ steps.discord-content.outputs.color }},
+                   \"fields\": [
+                     {
+                       \"name\": \"Repository\",
+                       \"value\": \"${{ github.repository }}\",
+                       \"inline\": true
+                     },
+                     {
+                       \"name\": \"Actor\",
+                       \"value\": \"${{ github.actor }}\",
+                       \"inline\": true
+                     },
+                     {
+                       \"name\": \"Commit\",
+                       \"value\": \"\`${{ github.sha }}\`\",
+                       \"inline\": false
+                     }
+                   ],
+                   \"footer\": {
+                     \"text\": \"GitHub Actions\"
+                   },
+                   \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"
+                 }
+               ]
+             }" \
+             ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+  # ================================
+  # Email Notifications (Critical Events)
+  # ================================
+  email-notification:
+    name: Email Notification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'failure'
+    
+    steps:
+    - name: Send email notification for critical failures
+      if: secrets.SMTP_SERVER && secrets.SMTP_USERNAME && secrets.SMTP_PASSWORD
+      run: |
+        # Install mail utilities
+        sudo apt-get update && sudo apt-get install -y mailutils ssmtp
+        
+        # Configure SSMTP
+        cat > /tmp/ssmtp.conf << EOF
+        root=${{ secrets.SMTP_USERNAME }}
+        mailhub=${{ secrets.SMTP_SERVER }}:${{ secrets.SMTP_PORT || '587' }}
+        hostname=github-actions
+        AuthUser=${{ secrets.SMTP_USERNAME }}
+        AuthPass=${{ secrets.SMTP_PASSWORD }}
+        UseSTARTTLS=YES
+        UseTLS=YES
+        EOF
+        
+        sudo cp /tmp/ssmtp.conf /etc/ssmtp/ssmtp.conf
+        
+        # Send email
+        cat > /tmp/email.txt << EOF
+        Subject: 🚨 Critical CI/CD Failure - ${{ github.repository }}
+        From: ${{ secrets.SMTP_USERNAME }}
+        To: ${{ secrets.NOTIFICATION_EMAIL }}
+        
+        CRITICAL FAILURE ALERT
+        ======================
+        
+        Repository: ${{ github.repository }}
+        Workflow: ${{ github.event.workflow_run.name }}
+        Status: ${{ github.event.workflow_run.conclusion }}
+        Branch: ${{ github.event.workflow_run.head_branch }}
+        Commit: ${{ github.sha }}
+        Actor: ${{ github.actor }}
+        
+        Failure Details:
+        ----------------
+        The workflow '${{ github.event.workflow_run.name }}' has failed on branch '${{ github.event.workflow_run.head_branch }}'.
+        
+        This requires immediate attention from the development team.
+        
+        View Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        
+        Time: $(date -u)
+        
+        Automated notification from GitHub Actions
+        EOF
+        
+        ssmtp ${{ secrets.NOTIFICATION_EMAIL }} < /tmp/email.txt
+        
+        echo "Critical failure email sent to ${{ secrets.NOTIFICATION_EMAIL }}"
+
+  # ================================
+  # Microsoft Teams Notifications
+  # ================================
+  teams-notification:
+    name: Microsoft Teams Notification
+    runs-on: ubuntu-latest
+    if: always() && secrets.TEAMS_WEBHOOK_URL
+    
+    steps:
+    - name: Determine Teams message
+      id: teams-content
+      run: |
+        if [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+          WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
+          WORKFLOW_STATUS="${{ github.event.workflow_run.conclusion }}"
+          
+          case "$WORKFLOW_STATUS" in
+            "success")
+              COLOR="Good"
+              TITLE="✅ Workflow Success: ${WORKFLOW_NAME}"
+              ;;
+            "failure")
+              COLOR="Attention"
+              TITLE="❌ Workflow Failed: ${WORKFLOW_NAME}"
+              ;;
+            *)
+              COLOR="Warning"
+              TITLE="⚠️ Workflow ${WORKFLOW_STATUS}: ${WORKFLOW_NAME}"
+              ;;
+          esac
+          
+          echo "color=${COLOR}" >> $GITHUB_OUTPUT
+          echo "title=${TITLE}" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Send Teams notification
+      if: steps.teams-content.outputs.title
+      run: |
+        curl -H "Content-Type: application/json" \
+             -X POST \
+             -d "{
+               \"@type\": \"MessageCard\",
+               \"@context\": \"https://schema.org/extensions\",
+               \"summary\": \"${{ steps.teams-content.outputs.title }}\",
+               \"themeColor\": \"${{ steps.teams-content.outputs.color }}\",
+               \"title\": \"${{ steps.teams-content.outputs.title }}\",
+               \"sections\": [
+                 {
+                   \"facts\": [
+                     {
+                       \"name\": \"Repository\",
+                       \"value\": \"${{ github.repository }}\"
+                     },
+                     {
+                       \"name\": \"Branch\",
+                       \"value\": \"${{ github.ref }}\"
+                     },
+                     {
+                       \"name\": \"Commit\",
+                       \"value\": \"${{ github.sha }}\"
+                     },
+                     {
+                       \"name\": \"Actor\",
+                       \"value\": \"${{ github.actor }}\"
+                     }
+                   ]
+                 }
+               ],
+               \"potentialAction\": [
+                 {
+                   \"@type\": \"OpenUri\",
+                   \"name\": \"View in GitHub\",
+                   \"targets\": [
+                     {
+                       \"os\": \"default\",
+                       \"uri\": \"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+                     }
+                   ]
+                 }
+               ]
+             }" \
+             ${{ secrets.TEAMS_WEBHOOK_URL }}
+
+  # ================================
+  # Notification Status Summary
+  # ================================
+  notification-summary:
+    name: Notification Summary
+    runs-on: ubuntu-latest
+    needs: [slack-notification, discord-notification, email-notification, teams-notification]
+    if: always()
+    
+    steps:
+    - name: Create notification summary
+      run: |
+        echo "📢 Notification Summary"
+        echo "======================="
+        echo ""
+        echo "Event: ${{ github.event_name }}"
+        echo "Repository: ${{ github.repository }}"
+        echo "Actor: ${{ github.actor }}"
+        echo "Ref: ${{ github.ref }}"
+        echo ""
+        echo "Notification Channels:"
+        echo "- Slack: ${{ secrets.SLACK_WEBHOOK_URL != '' && 'Configured' || 'Not configured' }}"
+        echo "- Discord: ${{ secrets.DISCORD_WEBHOOK_URL != '' && 'Configured' || 'Not configured' }}"
+        echo "- Email: ${{ secrets.SMTP_SERVER != '' && 'Configured' || 'Not configured' }}"
+        echo "- Teams: ${{ secrets.TEAMS_WEBHOOK_URL != '' && 'Configured' || 'Not configured' }}"
+        echo ""
+        echo "Job Status:"
+        echo "- Slack: ${{ needs.slack-notification.result }}"
+        echo "- Discord: ${{ needs.discord-notification.result }}"
+        echo "- Email: ${{ needs.email-notification.result }}"
+        echo "- Teams: ${{ needs.teams-notification.result }}"

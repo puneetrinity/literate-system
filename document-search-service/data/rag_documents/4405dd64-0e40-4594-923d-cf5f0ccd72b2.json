@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "4405dd64-0e40-4594-923d-cf5f0ccd72b2",
+    "filename": "comprehensive_test.txt",
+    "content_type": ".txt",
+    "file_size": 281,
+    "metadata": {
+      "title": "comprehensive_test.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-18T18:40:27.386523",
+    "processed_date": "2025-07-18T18:40:27.386479",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "This is a comprehensive test document with multiple paragraphs to test the upload functionality properly. This document contains various types of content including technical information, business data, and general text to ensure the chunking and indexing processes work correctly.",
+  "chunks": [
+    {
+      "chunk_id": "f17cd754-a354-41bc-b21f-3e8a6df1842d",
+      "content": "This is a comprehensive test document with multiple paragraphs to test the upload functionality properly This document contains various types of content including technical information, business data, and general text to ensure the chunking and indexing processes work correctly",
+      "metadata": {
+        "source_filename": "comprehensive_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "4405dd64-0e40-4594-923d-cf5f0ccd72b2",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-18T18:40:27.386939",
+      "embedding_shape": null
+    }
+  ]
+}

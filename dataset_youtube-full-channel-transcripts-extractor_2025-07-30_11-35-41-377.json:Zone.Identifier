@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://console.apify.com/
+HostUrl=https://api.apify.com/v2/datasets/DN4pULd7zRZCIb86N/items?attachment=true&clean=true&format=json

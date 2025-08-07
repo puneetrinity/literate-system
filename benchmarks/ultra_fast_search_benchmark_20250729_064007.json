@@ -1,0 +1,454 @@
+{
+  "benchmark_info": {
+    "start_time": "2025-07-29T06:39:46.458991",
+    "base_url": "http://localhost:8001",
+    "query_count": 8,
+    "end_time": "2025-07-29T06:40:07.000684",
+    "total_duration_seconds": 20.541693
+  },
+  "system_info_start": {
+    "cpu_percent": 7.0,
+    "memory_total_gb": 157.26208877563477,
+    "memory_available_gb": 148.33180236816406,
+    "memory_used_percent": 5.7,
+    "disk_total_gb": 50.0,
+    "disk_free_gb": 26.237117767333984,
+    "disk_used_percent": 47.52576446533203
+  },
+  "single_query_performance": [
+    {
+      "query": "artificial intelligence",
+      "result": {
+        "success": true,
+        "latency_ms": 8.15362500725314,
+        "response_time_ms": 0.5209445953369141,
+        "results_count": 0,
+        "status_code": 200
+      }
+    },
+    {
+      "query": "machine learning algorithms",
+      "result": {
+        "success": true,
+        "latency_ms": 4.7087450220715255,
+        "response_time_ms": 0.30350685119628906,
+        "results_count": 0,
+        "status_code": 200
+      }
+    },
+    {
+      "query": "data science techniques",
+      "result": {
+        "success": true,
+        "latency_ms": 23.451565008144826,
+        "response_time_ms": 17.7614688873291,
+        "results_count": 0,
+        "status_code": 200
+      }
+    }
+  ],
+  "throughput_benchmark": {
+    "total_requests": 20,
+    "successful_requests": 20,
+    "failed_requests": 0,
+    "success_rate": 1.0,
+    "total_time_seconds": 0.14831696299370378,
+    "queries_per_second": 134.84634256466688,
+    "latency_stats": {
+      "mean_ms": 93.9876404547249,
+      "median_ms": 114.50073101150338,
+      "p95_ms": 118.40909245074727,
+      "p99_ms": 119.57449850742705,
+      "min_ms": 7.276833988726139,
+      "max_ms": 119.865850021597,
+      "std_dev_ms": 41.08695501131301
+    },
+    "response_time_stats": {
+      "mean_ms": 5.341887474060059,
+      "median_ms": 0.1742839813232422,
+      "p95_ms": 17.860400676727327,
+      "p99_ms": 52.1102881431579
+    }
+  },
+  "query_complexity": {
+    "simple_keywords": {
+      "query_count": 5,
+      "successful_queries": 5,
+      "success_rate": 1.0,
+      "avg_latency_ms": 29.247998003847897,
+      "median_latency_ms": 21.105266991071403,
+      "max_latency_ms": 63.83416600874625,
+      "min_latency_ms": 19.40724701853469
+    },
+    "phrase_queries": {
+      "query_count": 5,
+      "successful_queries": 5,
+      "success_rate": 1.0,
+      "avg_latency_ms": 10.920844395877793,
+      "median_latency_ms": 5.640838004183024,
+      "max_latency_ms": 21.000576991355047,
+      "min_latency_ms": 4.535155021585524
+    },
+    "long_queries": {
+      "query_count": 3,
+      "successful_queries": 3,
+      "success_rate": 1.0,
+      "avg_latency_ms": 22.151262664313737,
+      "median_latency_ms": 21.20646901312284,
+      "max_latency_ms": 24.152787984348834,
+      "min_latency_ms": 21.09453099546954
+    },
+    "technical_queries": {
+      "query_count": 4,
+      "successful_queries": 4,
+      "success_rate": 1.0,
+      "avg_latency_ms": 20.133554258791264,
+      "median_latency_ms": 19.92012350820005,
+      "max_latency_ms": 21.324632019968703,
+      "min_latency_ms": 19.369337998796254
+    }
+  },
+  "scalability_benchmark": {
+    "concurrency_1": {
+      "total_requests": 1,
+      "successful_requests": 1,
+      "failed_requests": 0,
+      "success_rate": 1.0,
+      "total_time_seconds": 0.006681386003037915,
+      "queries_per_second": 149.66954454439792,
+      "latency_stats": {
+        "mean_ms": 6.058817991288379,
+        "median_ms": 6.058817991288379,
+        "p95_ms": 6.058817991288379,
+        "p99_ms": 6.058817991288379,
+        "min_ms": 6.058817991288379,
+        "max_ms": 6.058817991288379,
+        "std_dev_ms": 0
+      },
+      "response_time_stats": {
+        "mean_ms": 0.34546852111816406,
+        "median_ms": 0.34546852111816406,
+        "p95_ms": 0.34546852111816406,
+        "p99_ms": 0.34546852111816406
+      }
+    },
+    "concurrency_5": {
+      "total_requests": 5,
+      "successful_requests": 5,
+      "failed_requests": 0,
+      "success_rate": 1.0,
+      "total_time_seconds": 0.014046246011275798,
+      "queries_per_second": 355.96699616297394,
+      "latency_stats": {
+        "mean_ms": 7.26470640511252,
+        "median_ms": 6.679846002953127,
+        "p95_ms": 8.977869001682848,
+        "p99_ms": 9.035581804346293,
+        "min_ms": 5.668609024723992,
+        "max_ms": 9.050010005012155,
+        "std_dev_ms": 1.5136962364073006
+      },
+      "response_time_stats": {
+        "mean_ms": 0.1956939697265625,
+        "median_ms": 0.17595291137695312,
+        "p95_ms": 0.24199485778808594,
+        "p99_ms": 0.24390220642089844
+      }
+    },
+    "concurrency_10": {
+      "total_requests": 10,
+      "successful_requests": 10,
+      "failed_requests": 0,
+      "success_rate": 1.0,
+      "total_time_seconds": 0.031798178009921685,
+      "queries_per_second": 314.4834272227734,
+      "latency_stats": {
+        "mean_ms": 13.412330503342673,
+        "median_ms": 13.186382013373077,
+        "p95_ms": 16.572787407494612,
+        "p99_ms": 17.205792684981134,
+        "min_ms": 8.878898981492966,
+        "max_ms": 17.364044004352763,
+        "std_dev_ms": 2.32364363253343
+      },
+      "response_time_stats": {
+        "mean_ms": 0.2732276916503906,
+        "median_ms": 0.2624988555908203,
+        "p95_ms": 0.3246665000915527,
+        "p99_ms": 0.34226179122924805
+      }
+    },
+    "concurrency_20": {
+      "total_requests": 20,
+      "successful_requests": 20,
+      "failed_requests": 0,
+      "success_rate": 1.0,
+      "total_time_seconds": 0.060781566018704325,
+      "queries_per_second": 329.0471323796658,
+      "latency_stats": {
+        "mean_ms": 19.93122930289246,
+        "median_ms": 20.500223006820306,
+        "p95_ms": 27.63836846861523,
+        "p99_ms": 29.76619290129747,
+        "min_ms": 10.037326981546357,
+        "max_ms": 30.298149009468034,
+        "std_dev_ms": 4.943333622900398
+      },
+      "response_time_stats": {
+        "mean_ms": 0.2652287483215332,
+        "median_ms": 0.2599954605102539,
+        "p95_ms": 0.27363300323486334,
+        "p99_ms": 0.35227298736572255
+      }
+    },
+    "concurrency_50": {
+      "total_requests": 50,
+      "successful_requests": 50,
+      "failed_requests": 0,
+      "success_rate": 1.0,
+      "total_time_seconds": 0.11492863300372846,
+      "queries_per_second": 435.05259475572046,
+      "latency_stats": {
+        "mean_ms": 28.572703679674305,
+        "median_ms": 27.687402005540207,
+        "p95_ms": 49.36245810094987,
+        "p99_ms": 57.61545090033905,
+        "min_ms": 11.991569015663117,
+        "max_ms": 60.054715984733775,
+        "std_dev_ms": 11.410811638191268
+      },
+      "response_time_stats": {
+        "mean_ms": 0.15813350677490234,
+        "median_ms": 0.13971328735351562,
+        "p95_ms": 0.2618074417114258,
+        "p99_ms": 0.3273701667785644
+      }
+    },
+    "concurrency_100": {
+      "total_requests": 100,
+      "successful_requests": 100,
+      "failed_requests": 0,
+      "success_rate": 1.0,
+      "total_time_seconds": 0.1998721529962495,
+      "queries_per_second": 500.31982195076694,
+      "latency_stats": {
+        "mean_ms": 29.440703869622666,
+        "median_ms": 27.939957508351654,
+        "p95_ms": 58.531137606769335,
+        "p99_ms": 64.08766245149312,
+        "min_ms": 7.642757991561666,
+        "max_ms": 68.95048799924552,
+        "std_dev_ms": 13.851253579522124
+      },
+      "response_time_stats": {
+        "mean_ms": 0.16045808792114258,
+        "median_ms": 0.14257431030273438,
+        "p95_ms": 0.2063274383544922,
+        "p99_ms": 0.22476434707641646
+      }
+    }
+  },
+  "system_metrics": {
+    "service_metrics": {
+      "counters": {
+        "log_messages_total[level=info]": 612.0,
+        "log_errors_total[level=error]": 3.0,
+        "log_messages_total[level=error]": 3.0,
+        "search_request_calls_total": 232.0,
+        "search_requests_total": 232.0,
+        "search_calls_total": 232.0,
+        "search_queries_total": 24.0,
+        "search_success_total": 231.0,
+        "search_request_success_total": 231.0,
+        "search_errors_total": 1.0,
+        "search_errors_total[error_type=SEARCH_ENGINE_ERROR]": 1.0,
+        "search_request_errors_total": 1.0,
+        "search_cache_hits_total": 207.0
+      },
+      "gauges": {},
+      "histograms": {
+        "lsh_candidates_count": {
+          "count": 24,
+          "mean": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "std": 0.0
+        },
+        "hnsw_candidates_count": {
+          "count": 24,
+          "mean": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "std": 0.0
+        },
+        "total_candidates_count": {
+          "count": 24,
+          "mean": 0.0,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "std": 0.0
+        },
+        "search_response_time_ms": {
+          "count": 255,
+          "mean": 10.50715633467132,
+          "median": 0.17714500427246094,
+          "p95": 19.596314430236806,
+          "p99": 60.47165870666504,
+          "min": 0.1308917999267578,
+          "max": 845.3724384307861,
+          "std": 74.81842028202755
+        },
+        "search_duration_ms": {
+          "count": 232,
+          "mean": 5.717774917339456,
+          "median": 0.0171661376953125,
+          "p95": 16.089844703674316,
+          "p99": 51.39152050018304,
+          "min": 0.012636184692382812,
+          "max": 845.116376876831,
+          "std": 55.721758066724405
+        },
+        "search_request_duration_ms": {
+          "count": 232,
+          "mean": 6.075192114402508,
+          "median": 0.32711029052734375,
+          "p95": 16.466975212097168,
+          "p99": 51.9619464874267,
+          "min": 0.2579689025878906,
+          "max": 845.5948829650879,
+          "std": 55.733321395499075
+        }
+      },
+      "timestamp": "2025-07-29T06:40:03.666521+00:00"
+    },
+    "service_health": {
+      "status": "degraded",
+      "timestamp": "2025-07-29T06:40:04.995012+00:00",
+      "version": "2.0.0",
+      "uptime_seconds": 542.4789068698883,
+      "components": {
+        "system": {
+          "status": "healthy",
+          "message": "System resources normal",
+          "last_check": "2025-07-29T06:40:04.674609+00:00",
+          "details": {
+            "cpu_usage_percent": 9.0,
+            "memory_usage_percent": 5.7,
+            "memory_available_gb": 148.32627868652344,
+            "disk_usage_percent": 47.5,
+            "disk_free_gb": 26.237117767333984
+          }
+        },
+        "search_engine": {
+          "status": "healthy",
+          "message": "Search engine operational",
+          "last_check": "2025-07-29T06:40:04.674807+00:00",
+          "details": {
+            "model_loaded": true,
+            "total_searches": 24,
+            "avg_response_time_ms": 54.751843214035034,
+            "cache_hit_rate": 8.625
+          }
+        },
+        "embeddings": {
+          "status": "healthy",
+          "message": "Embedding model operational",
+          "last_check": "2025-07-29T06:40:04.699484+00:00",
+          "details": {
+            "model_name": "unknown",
+            "embedding_dimension": 384,
+            "test_embedding_time_ms": 24.62291717529297
+          }
+        },
+        "indexes": {
+          "status": "degraded",
+          "message": "Some indexes not loaded",
+          "last_check": "2025-07-29T06:40:04.699532+00:00",
+          "details": {
+            "hnsw_index_loaded": true,
+            "lsh_index_loaded": false,
+            "bm25_index_loaded": false,
+            "document_count": 0,
+            "corpus_size": 0
+          }
+        },
+        "storage": {
+          "status": "healthy",
+          "message": "Storage system accessible",
+          "last_check": "2025-07-29T06:40:04.699755+00:00",
+          "details": {
+            "index_directory_exists": true,
+            "index_directory_writable": true,
+            "hnsw_index_file_exists": false,
+            "other_data_file_exists": false,
+            "index_path": "./indexes"
+          }
+        },
+        "memory": {
+          "status": "healthy",
+          "message": "Memory usage normal",
+          "last_check": "2025-07-29T06:40:04.994851+00:00",
+          "details": {
+            "rss_mb": 904.140625,
+            "vms_mb": 9770.671875,
+            "gc_objects": 461139,
+            "gc_stats": [
+              {
+                "collections": 1119,
+                "collected": 6411,
+                "uncollectable": 0
+              },
+              {
+                "collections": 101,
+                "collected": 4923,
+                "uncollectable": 0
+              },
+              {
+                "collections": 10,
+                "collected": 15128,
+                "uncollectable": 0
+              }
+            ]
+          }
+        },
+        "api": {
+          "status": "healthy",
+          "message": "API components operational",
+          "last_check": "2025-07-29T06:40:04.994883+00:00",
+          "details": {
+            "endpoints_registered": true,
+            "middleware_loaded": true,
+            "request_handlers_active": true
+          }
+        }
+      }
+    },
+    "system_info": {
+      "cpu_percent": 6.7,
+      "memory_total_gb": 157.26208877563477,
+      "memory_available_gb": 148.32465744018555,
+      "memory_used_percent": 5.7,
+      "disk_total_gb": 50.0,
+      "disk_free_gb": 26.237117767333984,
+      "disk_used_percent": 47.52576446533203
+    }
+  },
+  "system_info_end": {
+    "cpu_percent": 7.1,
+    "memory_total_gb": 157.26208877563477,
+    "memory_available_gb": 148.32483673095703,
+    "memory_used_percent": 5.7,
+    "disk_total_gb": 50.0,
+    "disk_free_gb": 26.237117767333984,
+    "disk_used_percent": 47.52576446533203
+  }
+}

@@ -1,0 +1,21 @@
+<\!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Search System</title>
+    <script>
+        // Dynamic API base URL based on current location
+        const API_BASE = (() => {
+            const hostname = window.location.hostname;
+            if (hostname.includes('proxy.runpod.net')) {
+                // Running on RunPod proxy
+                return hostname.replace('-8000', '-8001');
+            } else {
+                // Local development
+                return 'http://localhost:8001';
+            }
+        })();
+        
+        const FULL_API_URL = window.location.protocol + '//' + API_BASE;
+    </script>

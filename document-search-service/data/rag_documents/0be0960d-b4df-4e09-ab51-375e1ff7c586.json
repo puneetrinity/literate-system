@@ -1,0 +1,108 @@
+{
+  "document": {
+    "id": "0be0960d-b4df-4e09-ab51-375e1ff7c586",
+    "filename": "advanced_ai_test.txt",
+    "content_type": ".txt",
+    "file_size": 1870,
+    "metadata": {
+      "title": "advanced_ai_test.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-18T07:12:06.365777",
+    "processed_date": "2025-07-18T07:12:06.365726",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "# Advanced AI System Test Document ## Overview This document contains information about advanced AI system features for comprehensive testing. ## Advanced Search Features ### Hierarchical Softmax Network (HSN) HSN is a neural network architecture that uses a hierarchical structure to efficiently compute softmax probabilities over large vocabularies. It reduces computational complexity from O(V) to O(log V) where V is the vocabulary size. Key benefits: - Faster training and inference - Reduced memory requirements - Scalable to large vocabularies - Better performance on rare words ### Locality Sensitive Hashing (LSH) LSH is a probabilistic method for dimensionality reduction that preserves the locality of data points. It's particularly useful for approximate nearest neighbor search in high-dimensional spaces. Applications: - Document similarity search - Image retrieval - Recommendation systems - Anomaly detection ### Thomson Sampling Bandit Thomson sampling is a Bayesian approach to the multi-armed bandit problem. It balances exploration and exploitation by sampling from posterior distributions. Algorithm characteristics: - Optimal regret bounds - Easy to implement - Handles non-stationary environments - Works well with contextual bandits ### Adaptive Router The adaptive router dynamically selects the best model or service based on query characteristics and current system state. Features: - Real-time performance monitoring - Load balancing across services - Quality-aware routing - Cost optimization ## Performance Metrics - Response time: <100ms for simple queries - Throughput: 1000+ queries per second - Accuracy: 95%+ for domain-specific queries - Memory usage: <2GB for full model ## Test Cases 1. Simple keyword search 2. Complex boolean queries 3. Semantic similarity search 4. Multi-modal queries 5. Real-time streaming queries",
+  "chunks": [
+    {
+      "chunk_id": "a0427b2a-865f-4987-9338-524707ae2d9e",
+      "content": "# Advanced AI System Test Document ## Overview This document contains information about advanced AI system features for comprehensive testing ## Advanced Search Features ### Hierarchical Softmax Network (HSN) HSN is a neural network architecture that uses a hierarchical structure to efficiently compute softmax probabilities over large vocabularies It reduces computational complexity from O(V) to O(log V) where V is the vocabulary size",
+      "metadata": {
+        "source_filename": "advanced_ai_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "0be0960d-b4df-4e09-ab51-375e1ff7c586",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-18T07:12:06.366304",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "eb501b6a-e13e-45db-bfce-6fe540a0061a",
+      "content": "om O(V) to O(log V) where V is the vocabulary size Key benefits: - Faster training and inference - Reduced memory requirements - Scalable to large vocabularies - Better performance on rare words ### Locality Sensitive Hashing (LSH) LSH is a probabilistic method for dimensionality reduction that preserves the locality of data points It's particularly useful for approximate nearest neighbor search in high-dimensional spaces",
+      "metadata": {
+        "source_filename": "advanced_ai_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "0be0960d-b4df-4e09-ab51-375e1ff7c586",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-18T07:12:06.366332",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "aeffd45b-1224-458a-b9fc-5db0b48dcc31",
+      "content": "nearest neighbor search in high-dimensional spaces Applications: - Document similarity search - Image retrieval - Recommendation systems - Anomaly detection ### Thomson Sampling Bandit Thomson sampling is a Bayesian approach to the multi-armed bandit problem It balances exploration and exploitation by sampling from posterior distributions",
+      "metadata": {
+        "source_filename": "advanced_ai_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "0be0960d-b4df-4e09-ab51-375e1ff7c586",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-18T07:12:06.366353",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "ec7c4c33-71a1-432b-899e-0d52564fc964",
+      "content": "loitation by sampling from posterior distributions Algorithm characteristics: - Optimal regret bounds - Easy to implement - Handles non-stationary environments - Works well with contextual bandits ### Adaptive Router The adaptive router dynamically selects the best model or service based on query characteristics and current system state",
+      "metadata": {
+        "source_filename": "advanced_ai_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "0be0960d-b4df-4e09-ab51-375e1ff7c586",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-18T07:12:06.366370",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "ab714163-74be-4c7f-bc1c-b205302da689",
+      "content": "on query characteristics and current system state Features: - Real-time performance monitoring - Load balancing across services - Quality-aware routing - Cost optimization ## Performance Metrics - Response time: <100ms for simple queries - Throughput: 1000+ queries per second - Accuracy: 95%+ for domain-specific queries - Memory usage: <2GB for full model ## Test Cases 1 Simple keyword search 2 Complex boolean queries 3 Semantic similarity search 4 Multi-modal queries 5 Real-time streaming queries",
+      "metadata": {
+        "source_filename": "advanced_ai_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "0be0960d-b4df-4e09-ab51-375e1ff7c586",
+      "chunk_index": 4,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-18T07:12:06.366396",
+      "embedding_shape": null
+    }
+  ]
+}

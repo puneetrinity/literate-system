@@ -1,0 +1,91 @@
+{
+  "document": {
+    "id": "6dd0d4cb-a46b-4d58-8b96-bb801d10151a",
+    "filename": "test_rag_pipeline.pdf",
+    "content_type": ".pdf",
+    "file_size": 2425,
+    "metadata": {
+      "title": "test_rag_pipeline.pdf",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T11:00:57.267309",
+    "processed_date": "2025-07-20T11:00:57.267271",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Advanced RAG Pipeline Testing Document This document tests the complete RAG pipeline functionality including: 1. PDF Document Processing and Text Extraction - Automatic parsing of PDF content - Text normalization and cleaning 2. Semantic Chunking and Indexing - Intelligent document segmentation - Vector embedding generation using transformer models - Real-time indexing into the search engine 3. Multi-Modal Search Capabilities - Semantic search using neural embeddings - Keyword-based exact matching - Hybrid search combining both approaches 4. Performance and Scalability Testing - Response time measurement - Accuracy evaluation - Concurrent request handling Key Technologies: - SentenceTransformers for embeddings - FAISS for vector similarity search - SQLite for metadata storage - FastAPI for REST endpoints This PDF should be automatically processed, chunked, embedded, and indexed for immediate searchability across all search modes. Test queries should include: pipeline testing, PDF processing, semantic search, vector embeddings, and performance evaluation.",
+  "chunks": [
+    {
+      "chunk_id": "fb61809e-9b32-4ac8-9eb4-4468bc0d2c37",
+      "content": "Advanced RAG Pipeline Testing Document This document tests the complete RAG pipeline functionality including: 1 PDF Document Processing and Text Extraction - Automatic parsing of PDF content - Text normalization and cleaning 2 Semantic Chunking and Indexing - Intelligent document segmentation - Vector embedding generation using transformer models - Real-time indexing into the search engine 3",
+      "metadata": {
+        "source_filename": "test_rag_pipeline.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6dd0d4cb-a46b-4d58-8b96-bb801d10151a",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T11:00:57.267660",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "ba1a8e22-332a-413b-b39d-0fceaa85e201",
+      "content": "dels - Real-time indexing into the search engine 3 Multi-Modal Search Capabilities - Semantic search using neural embeddings - Keyword-based exact matching - Hybrid search combining both approaches 4",
+      "metadata": {
+        "source_filename": "test_rag_pipeline.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6dd0d4cb-a46b-4d58-8b96-bb801d10151a",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T11:00:57.267673",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "52736654-894a-46ff-a008-875faa767152",
+      "content": "tching - Hybrid search combining both approaches 4 Performance and Scalability Testing - Response time measurement - Accuracy evaluation - Concurrent request handling Key Technologies: - SentenceTransformers for embeddings - FAISS for vector similarity search - SQLite for metadata storage - FastAPI for REST endpoints This PDF should be automatically processed, chunked, embedded, and indexed for immediate searchability across all search modes",
+      "metadata": {
+        "source_filename": "test_rag_pipeline.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6dd0d4cb-a46b-4d58-8b96-bb801d10151a",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T11:00:57.267682",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "82045b2f-3888-4a23-8e5d-60b0d166b4e4",
+      "content": "or immediate searchability across all search modes Test queries should include: pipeline testing, PDF processing, semantic search, vector embeddings, and performance evaluation",
+      "metadata": {
+        "source_filename": "test_rag_pipeline.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6dd0d4cb-a46b-4d58-8b96-bb801d10151a",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T11:00:57.267690",
+      "embedding_shape": null
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "document": {
+    "id": "f79a7935-236b-459c-b1ab-3cdd73af3f32",
+    "filename": "resume2.txt",
+    "content_type": ".txt",
+    "file_size": 670,
+    "metadata": {
+      "title": "resume2.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T18:03:02.506679",
+    "processed_date": "2025-07-20T18:03:02.506638",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "SARAH JOHNSON - Full Stack Developer EXPERIENCE: - 4 years full-stack development experience - Frontend: React, Vue.js, JavaScript, TypeScript - Backend: Node.js, Python (Django), PostgreSQL - Some machine learning exposure with scikit-learn - Built e-commerce platforms handling 10k+ users - Experience with microservices architecture EDUCATION: - B.S. Software Engineering, Stanford (2019) - AWS Solutions Architect Certified PROJECTS: - Developed real-time chat application with WebSockets - Created inventory management system for retail chain - Built data visualization dashboard using D3.js and Python SKILLS: React, Node.js, Python, PostgreSQL, AWS, DevOps",
+  "chunks": [
+    {
+      "chunk_id": "6d27ab5c-f44e-4ef1-9314-11992ce1f500",
+      "content": "SARAH JOHNSON - Full Stack Developer EXPERIENCE: - 4 years full-stack development experience - Frontend: React, Vue js, JavaScript, TypeScript - Backend: Node js, Python (Django), PostgreSQL - Some machine learning exposure with scikit-learn - Built e-commerce platforms handling 10k+ users - Experience with microservices architecture EDUCATION: - B S",
+      "metadata": {
+        "source_filename": "resume2.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "f79a7935-236b-459c-b1ab-3cdd73af3f32",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T18:03:02.507081",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "cdfb3892-88d0-4b8b-98b9-1040b87b4f7a",
+      "content": "e with microservices architecture EDUCATION: - B S Software Engineering, Stanford (2019) - AWS Solutions Architect Certified PROJECTS: - Developed real-time chat application with WebSockets - Created inventory management system for retail chain - Built data visualization dashboard using D3 js and Python SKILLS: React, Node js, Python, PostgreSQL, AWS, DevOps",
+      "metadata": {
+        "source_filename": "resume2.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "f79a7935-236b-459c-b1ab-3cdd73af3f32",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T18:03:02.507108",
+      "embedding_shape": null
+    }
+  ]
+}

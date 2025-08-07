@@ -1,0 +1,278 @@
+{
+  "document": {
+    "id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+    "filename": "Dockerfile (7).txt",
+    "content_type": ".txt",
+    "file_size": 6513,
+    "metadata": {
+      "title": "Dockerfile (7).txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-21T08:59:11.472659",
+    "processed_date": "2025-07-21T08:59:11.472613",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "# Fixed Multi-arch Dockerfile with proper frontend build # Frontend build stage - Fixed FROM node:18 AS frontend-build WORKDIR /app/frontend # Install build dependencies that might be needed RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/* # Copy package files COPY frontend/package*.json ./ # Install dependencies with better error handling RUN npm ci --verbose # Copy frontend source COPY frontend/ ./ # Build with error handling RUN npm run build && test -f build/index.html # Conditional base image based on architecture FROM nvidia/cuda:12.1.0-base-ubuntu22.04 AS base-amd64 FROM ubuntu:22.04 AS base-arm64 # Use the appropriate base image FROM base-${TARGETARCH} AS production # Set environment variables to prevent interactive prompts ENV DEBIAN_FRONTEND=noninteractive \\ PYTHONUNBUFFERED=1 # CUDA and GPU environment variables (only effective on AMD64) ENV CUDA_VISIBLE_DEVICES=0 \\ NVIDIA_VISIBLE_DEVICES=all \\ PATH=/usr/local/cuda/bin:$PATH \\ LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH # Ollama configuration ENV OLLAMA_HOST=0.0.0.0:11434 \\ OLLAMA_NUM_PARALLEL=2 \\ OLLAMA_MAX_LOADED_MODELS=2 \\ OLLAMA_GPU_OVERHEAD=0 \\ OLLAMA_DEBUG=INFO # Memory management ENV MAX_MEMORY_MB=12288 \\ CACHE_MEMORY_LIMIT_MB=1024 \\ MODEL_MEMORY_LIMIT_MB=6144 \\ SEMANTIC_MODEL_MAX_MEMORY_MB=500 # Feature toggles ENV ENABLE_SEMANTIC_CLASSIFICATION=false \\ ENABLE_STREAMING=true \\ ENABLE_MODEL_WARMUP=true \\ ENABLE_DETAILED_METRICS=true \\ ENABLE_DASHBOARD=true \\ ENABLE_WEBSOCKET_DASHBOARD=false # Dashboard configuration ENV DASHBOARD_PATH=/app/static \\ ENABLE_REACT_DASHBOARD=true # Performance and caching ENV ENABLE_REDIS_CACHE=true \\ REDIS_URL=redis://localhost:6379 \\ ENABLE_SEMANTIC_CACHE=true \\ SEMANTIC_SIMILARITY_THRESHOLD=0.85 # Security settings ENV ENABLE_AUTH=false \\ CORS_ORIGINS='[\"*\"]' # Advanced features ENV ENABLE_CIRCUIT_BREAKER=true \\ ENABLE_CONNECTION_POOLING=true \\ ENABLE_PERFORMANCE_MONITORING=true # Core application settings ENV HOST=0.0.0.0 \\ PORT=8001 \\ LOG_LEVEL=INFO \\ DEBUG=false WORKDIR /app # Install system dependencies RUN apt-get update && apt-get install -y \\ curl \\ python3 \\ python3-pip \\ python3-dev \\ build-essential \\ git \\ dos2unix \\ wget \\ ca-certificates \\ && rm -rf /var/lib/apt/lists/* # Install Node.js RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \\ && apt-get install -y nodejs \\ && rm -rf /var/lib/apt/lists/* # Install Ollama RUN curl -fsSL https://ollama.com/install.sh | sh # Copy Python requirements first COPY requirements.txt ./ # Install Python dependencies RUN pip3 install --no-cache-dir --upgrade pip && \\ pip3 install --no-cache-dir -r requirements.txt # Install enhanced Python dependencies with error handling RUN pip3 install --no-cache-dir \\ sentence-transformers>=2.2.0 \\ faiss-cpu==1.7.4 \\ sse-starlette==1.6.5 \\ redis>=4.5.0 \\ aioredis>=2.0.0 \\ numpy>=1.21.0 \\ scikit-learn>=1.1.0 \\ prometheus-client \\ || echo \"Some enhanced features may be limited\" # Copy built frontend from previous stage COPY --from=frontend-build /app/frontend/build ./frontend/build # Copy frontend source code COPY frontend/ ./frontend/ # Verify the fixed package.json RUN echo \"=== Verifying Fixed package.json ===\" && \\ echo \"Checking for dependency resolutions...\" && \\ if grep -q \"resolutions\\|overrides\" /app/frontend/package.json; then \\ echo \"✅ Dependency resolutions found in package.json\" && \\ echo \"Resolutions:\" && \\ grep -A 10 '\"resolutions\"' /app/frontend/package.json 2>/dev/null || echo \"No resolutions section\" && \\ echo \"Overrides:\" && \\ grep -A 10 '\"overrides\"' /app/frontend/package.json 2>/dev/null || echo \"No overrides section\"; \\ else \\ echo \"⚠️ No dependency resolutions found - may still have ajv conflicts\"; \\ fi # Install dependencies with the fixed package.json WORKDIR /app/frontend RUN echo \"📦 Installing frontend dependencies...\" && \\ npm config set fund false && \\ npm config set audit-level none && \\ echo \"\" && \\ echo \"Using npm install with resolved dependencies...\" && \\ npm install 2>&1 | tee /tmp/npm-install.log && \\ echo \"\" && \\ echo \"✅ Dependencies installed. Checking ajv resolution...\" && \\ if [ -d \"node_modules/ajv\" ]; then \\ echo \"AJV version installed:\" && \\ cat node_modules/ajv/package.json | grep '\"version\"' | head -1 && \\ echo \"Checking ajv structure...\" && \\ if [ -f \"node_modules/ajv/dist/compile/codegen/index.js\" ] || [ -f \"node_modules/ajv/dist/compile/codegen.js\" ]; then \\ echo \"✅ AJV codegen found - dependency conflict resolved\"; \\ else \\ echo \"⚠️ AJV codegen structure:\" && \\ find node_modules/ajv -name \"*codegen*\" 2>/dev/null | head -5 || echo \"No codegen files found\"; \\ fi; \\ else \\ echo \"❌ AJV not installed\"; \\ fi && \\ if [ -d \"node_modules/ajv-keywords\" ]; then \\ echo \"AJV-Keywords version:\" && \\ cat node_modules/ajv-keywords/package.json | grep '\"version\"' | head -1; \\ fi # Build the frontend RUN echo \"🏗️ Building frontend...\" && \\ echo \"Setting up build environment...\" && \\ export NODE_OPTIONS=\"--max-old-space-size=4096\" && \\ export GENERATE_SOURCEMAP=false && \\ export CI=true && \\ echo \"\" && \\ echo \"🚀 Running vite build...\" && \\ npm run build 2>&1 | tee /tmp/build.log && \\ echo \"\" && \\ echo \"🔍 Checking build output...\" && \\ if [ -d \"build\" ] && [ -f \"build/index.html\" ]; then \\ echo \"✅ Frontend build successful!\" && \\ echo \"Build contents:\" && \\ ls -la build/ && \\ echo \"Build size:\" && \\ du -sh build/ && \\ echo \"Static assets:\" && \\ find build -name \"*.js\" -o -name \"*.css\" | wc -l && echo \" files generated\"; \\ else \\ echo \"❌ Build failed!\" && \\ exit 1; \\ fi # Move back to app directory WORKDIR /app # Copy Python application code COPY *.py ./ # Create necessary directories RUN mkdir -p data logs # Expose ports EXPOSE 8001 11434 # Health check HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \\ CMD curl -f http://localhost:8001/health || exit 1 # Run the application CMD [\"python3\", \"main.py\"]",
+  "chunks": [
+    {
+      "chunk_id": "f497a47c-f4ad-409f-86b6-7365e24a144a",
+      "content": "# Fixed Multi-arch Dockerfile with proper frontend build # Frontend build stage - Fixed FROM node:18 AS frontend-build WORKDIR /app/frontend # Install build dependencies that might be needed RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/* # Copy package files COPY frontend/package* json / # Install dependencies with better error handling RUN npm ci --verbose # Copy frontend source COPY frontend/ / # Build with error handling RUN npm run build && test -f build/index",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473528",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "a18dc776-f990-4e40-87a6-e0a6458e74d9",
+      "content": "handling RUN npm run build && test -f build/index html # Conditional base image based on architecture FROM nvidia/cuda:12 1 0-base-ubuntu22 04 AS base-amd64 FROM ubuntu:22",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473561",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "43837dea-68fc-4a7b-8ce7-8152951e1e28",
+      "content": "1 0-base-ubuntu22 04 AS base-amd64 FROM ubuntu:22 04 AS base-arm64 # Use the appropriate base image FROM base-${TARGETARCH} AS production # Set environment variables to prevent interactive prompts ENV DEBIAN_FRONTEND=noninteractive \\ PYTHONUNBUFFERED=1 # CUDA and GPU environment variables (only effective on AMD64) ENV CUDA_VISIBLE_DEVICES=0 \\ NVIDIA_VISIBLE_DEVICES=all \\ PATH=/usr/local/cuda/bin:$PATH \\ LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH # Ollama configuration ENV OLLAMA_HOST=0 0 0",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473590",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "c0afc4a5-603e-4125-9325-419df877dd1b",
+      "content": "_PATH # Ollama configuration ENV OLLAMA_HOST=0 0 0 0:11434 \\ OLLAMA_NUM_PARALLEL=2 \\ OLLAMA_MAX_LOADED_MODELS=2 \\ OLLAMA_GPU_OVERHEAD=0 \\ OLLAMA_DEBUG=INFO # Memory management ENV MAX_MEMORY_MB=12288 \\ CACHE_MEMORY_LIMIT_MB=1024 \\ MODEL_MEMORY_LIMIT_MB=6144 \\ SEMANTIC_MODEL_MAX_MEMORY_MB=500 # Feature toggles ENV ENABLE_SEMANTIC_CLASSIFICATION=false \\ ENABLE_STREAMING=true \\ ENABLE_MODEL_WARMUP=true \\ ENABLE_DETAILED_METRICS=true \\ ENABLE_DASHBOARD=true \\ ENABLE_WEBSOCKET_DASHBOARD=false # Dashboard configuration ENV DASHBOARD_PATH=/app/static \\ ENABLE_REACT_DASHBOARD=true # Performance and caching ENV ENABLE_REDIS_CACHE=true \\ REDIS_URL=redis://localhost:6379 \\ ENABLE_SEMANTIC_CACHE=true \\ SEMANTIC_SIMILARITY_THRESHOLD=0",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473610",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "87f2abf0-13de-4a72-aab6-881664636422",
+      "content": "ANTIC_CACHE=true \\ SEMANTIC_SIMILARITY_THRESHOLD=0 85 # Security settings ENV ENABLE_AUTH=false \\ CORS_ORIGINS='[\"*\"]' # Advanced features ENV ENABLE_CIRCUIT_BREAKER=true \\ ENABLE_CONNECTION_POOLING=true \\ ENABLE_PERFORMANCE_MONITORING=true # Core application settings ENV HOST=0 0 0",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 4,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473628",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "7fc0d19a-f9b9-4ac4-bcd5-785b90bd9790",
+      "content": "NG=true # Core application settings ENV HOST=0 0 0 0 \\ PORT=8001 \\ LOG_LEVEL=INFO \\ DEBUG=false WORKDIR /app # Install system dependencies RUN apt-get update && apt-get install -y \\ curl \\ python3 \\ python3-pip \\ python3-dev \\ build-essential \\ git \\ dos2unix \\ wget \\ ca-certificates \\ && rm -rf /var/lib/apt/lists/* # Install Node js RUN curl -fsSL https://deb nodesource com/setup_18 x | bash - \\ && apt-get install -y nodejs \\ && rm -rf /var/lib/apt/lists/* # Install Ollama RUN curl -fsSL https://ollama",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 5,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473648",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "00ac4c03-1810-4e3f-801b-49db7840dd9b",
+      "content": "s/* # Install Ollama RUN curl -fsSL https://ollama com/install sh | sh # Copy Python requirements first COPY requirements txt / # Install Python dependencies RUN pip3 install --no-cache-dir --upgrade pip && \\ pip3 install --no-cache-dir -r requirements txt # Install enhanced Python dependencies with error handling RUN pip3 install --no-cache-dir \\ sentence-transformers>=2 2 0 \\ faiss-cpu==1 7 4 \\ sse-starlette==1 6 5 \\ redis>=4 5 0 \\ aioredis>=2 0 0 \\ numpy>=1 21 0 \\ scikit-learn>=1 1",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 6,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473682",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "c27c868a-f3e1-4621-8e3e-3f5981250598",
+      "content": "ioredis>=2 0 0 \\ numpy>=1 21 0 \\ scikit-learn>=1 1 0 \\ prometheus-client \\ || echo \"Some enhanced features may be limited\" # Copy built frontend from previous stage COPY --from=frontend-build /app/frontend/build /frontend/build # Copy frontend source code COPY frontend/ /frontend/ # Verify the fixed package json RUN echo \"=== Verifying Fixed package json ===\" && \\ echo \"Checking for dependency resolutions \" && \\ if grep -q \"resolutions\\|overrides\" /app/frontend/package",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 7,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473703",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "dab1b48b-37c1-4fea-b425-a0c30093fc91",
+      "content": "-q \"resolutions\\|overrides\" /app/frontend/package json; then \\ echo \"✅ Dependency resolutions found in package json\" && \\ echo \"Resolutions:\" && \\ grep -A 10 '\"resolutions\"' /app/frontend/package json 2>/dev/null || echo \"No resolutions section\" && \\ echo \"Overrides:\" && \\ grep -A 10 '\"overrides\"' /app/frontend/package json 2>/dev/null || echo \"No overrides section\"; \\ else \\ echo \"⚠️ No dependency resolutions found - may still have ajv conflicts\"; \\ fi # Install dependencies with the fixed package",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 8,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473734",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "914afb30-00c4-436e-a9cd-eeaf41c89656",
+      "content": "\\ fi # Install dependencies with the fixed package json WORKDIR /app/frontend RUN echo \"📦 Installing frontend dependencies \" && \\ npm config set fund false && \\ npm config set audit-level none && \\ echo \"\" && \\ echo \"Using npm install with resolved dependencies \" && \\ npm install 2>&1 | tee /tmp/npm-install log && \\ echo \"\" && \\ echo \"✅ Dependencies installed Checking ajv resolution \" && \\ if [ -d \"node_modules/ajv\" ]; then \\ echo \"AJV version installed:\" && \\ cat node_modules/ajv/package",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 9,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473776",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "df7a11ba-6092-40e6-a451-44f57f1cf64e",
+      "content": "sion installed:\" && \\ cat node_modules/ajv/package json | grep '\"version\"' | head -1 && \\ echo \"Checking ajv structure \" && \\ if [ -f \"node_modules/ajv/dist/compile/codegen/index js\" ] || [ -f \"node_modules/ajv/dist/compile/codegen",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 10,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473794",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "358047c9-6569-43a3-971c-2336632698ac",
+      "content": "\" ] || [ -f \"node_modules/ajv/dist/compile/codegen js\" ]; then \\ echo \"✅ AJV codegen found - dependency conflict resolved\"; \\ else \\ echo \"⚠️ AJV codegen structure:\" && \\ find node_modules/ajv -name \"*codegen*\" 2>/dev/null | head -5 || echo \"No codegen files found\"; \\ fi; \\ else \\ echo \"❌ AJV not installed\"; \\ fi && \\ if [ -d \"node_modules/ajv-keywords\" ]; then \\ echo \"AJV-Keywords version:\" && \\ cat node_modules/ajv-keywords/package",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 11,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473809",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "b67a7c6b-1550-48fa-b630-df42127d354b",
+      "content": "rsion:\" && \\ cat node_modules/ajv-keywords/package json | grep '\"version\"' | head -1; \\ fi # Build the frontend RUN echo \"🏗️ Building frontend \" && \\ echo \"Setting up build environment \" && \\ export NODE_OPTIONS=\"--max-old-space-size=4096\" && \\ export GENERATE_SOURCEMAP=false && \\ export CI=true && \\ echo \"\" && \\ echo \"🚀 Running vite build \" && \\ npm run build 2>&1 | tee /tmp/build log && \\ echo \"\" && \\ echo \"🔍 Checking build output \" && \\ if [ -d \"build\" ] && [ -f \"build/index",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 12,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473857",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "2cfae5bf-24af-4414-a6ef-74165c394f33",
+      "content": "tput \" && \\ if [ -d \"build\" ] && [ -f \"build/index html\" ]; then \\ echo \"✅ Frontend build successful \" && \\ echo \"Build contents:\" && \\ ls -la build/ && \\ echo \"Build size:\" && \\ du -sh build/ && \\ echo \"Static assets:\" && \\ find build -name \"* js\" -o -name \"* css\" | wc -l && echo \" files generated\"; \\ else \\ echo \"❌ Build failed \" && \\ exit 1; \\ fi # Move back to app directory WORKDIR /app # Copy Python application code COPY * py",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 13,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473892",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "93a202e3-d50f-4f08-b628-35d7ef273ffa",
+      "content": "KDIR /app # Copy Python application code COPY * py / # Create necessary directories RUN mkdir -p data logs # Expose ports EXPOSE 8001 11434 # Health check HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \\ CMD curl -f http://localhost:8001/health || exit 1 # Run the application CMD [\"python3\", \"main py\"]",
+      "metadata": {
+        "source_filename": "Dockerfile (7).txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8f0be005-45c8-4936-bc5d-dded4a33779c",
+      "chunk_index": 14,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:11.473909",
+      "embedding_shape": null
+    }
+  ]
+}

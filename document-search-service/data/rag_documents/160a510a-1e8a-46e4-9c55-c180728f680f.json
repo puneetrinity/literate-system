@@ -1,0 +1,43 @@
+{
+  "document": {
+    "id": "160a510a-1e8a-46e4-9c55-c180728f680f",
+    "filename": "test_base64.txt",
+    "content_type": ".txt",
+    "file_size": 38,
+    "metadata": {
+      "title": "Test Base64",
+      "description": "Testing base64 upload",
+      "tags": [
+        "test",
+        "base64"
+      ],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-21T11:26:32.012274",
+    "processed_date": "2025-07-21T11:26:32.012230",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "This is a test file for base64 upload",
+  "chunks": [
+    {
+      "chunk_id": "79117348-a271-438b-8736-89a1fe07431c",
+      "content": "This is a test file for base64 upload",
+      "metadata": {
+        "source_filename": "test_base64.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "160a510a-1e8a-46e4-9c55-c180728f680f",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T11:26:32.013579",
+      "embedding_shape": null
+    }
+  ]
+}

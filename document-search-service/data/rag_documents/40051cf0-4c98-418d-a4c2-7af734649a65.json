@@ -1,0 +1,57 @@
+{
+  "document": {
+    "id": "40051cf0-4c98-418d-a4c2-7af734649a65",
+    "filename": "resume1.txt",
+    "content_type": ".txt",
+    "file_size": 678,
+    "metadata": {
+      "title": "resume1.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T18:02:42.084210",
+    "processed_date": "2025-07-20T18:02:42.084167",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "JOHN SMITH - Senior Python Developer EXPERIENCE: - 5 years Python development experience - Expertise in Django, Flask, FastAPI - Machine Learning: TensorFlow, PyTorch, scikit-learn - Built recommendation systems for e-commerce platform - Led team of 3 developers on AI chatbot project - AWS, Docker, Kubernetes deployment experience EDUCATION: - B.S. Computer Science, MIT (2018) - Machine Learning Specialization Certificate PROJECTS: - Developed neural network for image classification (95% accuracy) - Created NLP sentiment analysis tool for customer reviews - Built automated trading bot using Python and pandas SKILLS: Python, ML, AI, NLP, Computer Vision, AWS, DevOps",
+  "chunks": [
+    {
+      "chunk_id": "d82f9d42-550c-43e1-90dd-a9b31b5d4111",
+      "content": "JOHN SMITH - Senior Python Developer EXPERIENCE: - 5 years Python development experience - Expertise in Django, Flask, FastAPI - Machine Learning: TensorFlow, PyTorch, scikit-learn - Built recommendation systems for e-commerce platform - Led team of 3 developers on AI chatbot project - AWS, Docker, Kubernetes deployment experience EDUCATION: - B S",
+      "metadata": {
+        "source_filename": "resume1.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "40051cf0-4c98-418d-a4c2-7af734649a65",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T18:02:42.084608",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "7141d87b-0253-46ab-8f03-10af54333f33",
+      "content": "Kubernetes deployment experience EDUCATION: - B S Computer Science, MIT (2018) - Machine Learning Specialization Certificate PROJECTS: - Developed neural network for image classification (95% accuracy) - Created NLP sentiment analysis tool for customer reviews - Built automated trading bot using Python and pandas SKILLS: Python, ML, AI, NLP, Computer Vision, AWS, DevOps",
+      "metadata": {
+        "source_filename": "resume1.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "40051cf0-4c98-418d-a4c2-7af734649a65",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T18:02:42.084634",
+      "embedding_shape": null
+    }
+  ]
+}

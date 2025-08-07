@@ -1,0 +1,1625 @@
+openapi: 3.0.3
+info:
+  title: Unified AI System API
+  description: |
+    Comprehensive AI platform combining chat, search, and research capabilities.
+    
+    ## Features
+    - **Intelligent Chat**: Multi-model AI conversations with context management
+    - **Ultra-Fast Search**: High-performance document search with ML ranking
+    - **Deep Research**: Web research with real-time information gathering
+    - **RAG (Retrieval Augmented Generation)**: Context-aware responses using documents
+    - **Multi-Agent Workflows**: Specialized AI agents for different tasks
+    
+    ## Base URLs
+    - **AI Chat Service**: `http://localhost:8003` (development)
+    - **Document Search Service**: `http://localhost:8001` (development)
+    
+    ## Authentication
+    Optional API key authentication via `Authorization: Bearer <token>` header.
+    
+    ## Rate Limits
+    - Free tier: 20 requests/minute
+    - Basic tier: 60 requests/minute  
+    - Pro tier: 200 requests/minute
+    - Enterprise: Unlimited
+    
+    ## Cost Structure
+    - Local models (Ollama): Free
+    - Premium processing: ₹0.08-0.15 per request
+    - Web search: ₹0.05-0.25 per query
+    - Document indexing: ₹0.02 per document
+    
+  version: 1.0.0
+  contact:
+    name: Unified AI Support
+    email: support@unified-ai.com
+    url: https://docs.unified-ai.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8003
+    description: AI Chat Service (Development)
+  - url: http://localhost:8001
+    description: Document Search Service (Development)
+  - url: https://api.unified-ai.com
+    description: Production API
+
+tags:
+  - name: Chat
+    description: Conversational AI and chat completion
+  - name: Research
+    description: Deep research and web search capabilities
+  - name: Search
+    description: Web search functionality
+  - name: Documents
+    description: Document upload, indexing, and search
+  - name: RAG
+    description: Retrieval Augmented Generation
+  - name: Models
+    description: AI model management
+  - name: Monitoring
+    description: System monitoring and health checks
+  - name: Analytics
+    description: Usage analytics and reporting
+
+paths:
+  # Chat Endpoints
+  /api/v1/chat/complete:
+    post:
+      tags: [Chat]
+      summary: Complete chat conversation
+      description: |
+        Generate AI response for a chat message with intelligent routing.
+        Supports context management, quality levels, and cost controls.
+      operationId: chatComplete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            examples:
+              basic_chat:
+                summary: Basic chat request
+                value:
+                  message: "Explain machine learning in simple terms"
+                  session_id: "user_session_123"
+                  quality_requirement: "balanced"
+                  max_cost: 0.10
+              advanced_chat:
+                summary: Advanced chat with options
+                value:
+                  message: "Analyze the economic impact of AI on the job market"
+                  session_id: "research_session_456"
+                  quality_requirement: "high"
+                  max_cost: 0.20
+                  response_style: "detailed"
+                  include_sources: true
+                  include_debug_info: false
+      responses:
+        '200':
+          description: Successful chat completion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+              examples:
+                successful_response:
+                  summary: Successful chat response
+                  value:
+                    status: "success"
+                    data:
+                      response: "Machine learning is a subset of artificial intelligence that enables computers to learn patterns from data..."
+                      session_id: "user_session_123"
+                      context:
+                        session_id: "user_session_123"
+                        message_count: 5
+                        last_updated: "2024-01-01T10:00:00Z"
+                      sources: []
+                      citations: []
+                    metadata:
+                      query_id: "query_789"
+                      correlation_id: "corr_abc123"
+                      execution_time: 2.3
+                      cost: 0.08
+                      models_used: ["phi3:mini"]
+                      confidence: 0.92
+                      cached: false
+                      timestamp: "2024-01-01T10:00:00Z"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          $ref: '#/components/responses/InsufficientBudget'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/chat/stream:
+    post:
+      tags: [Chat]
+      summary: Stream chat response
+      description: |
+        OpenAI-compatible streaming chat completion.
+        Returns server-sent events for real-time response streaming.
+      operationId: chatStream
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatStreamRequest'
+            examples:
+              streaming_chat:
+                summary: Streaming chat request
+                value:
+                  messages:
+                    - role: "user"
+                      content: "Write a poem about artificial intelligence"
+                  model: "auto"
+                  max_tokens: 300
+                  temperature: 0.7
+                  stream: true
+      responses:
+        '200':
+          description: Streaming response
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                format: binary
+              example: |
+                data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1640995200,"model":"phi3:mini","choices":[{"index":0,"delta":{"content":"AI"},"finish_reason":null}]}
+                
+                data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1640995200,"model":"phi3:mini","choices":[{"index":0,"delta":{"content":" is"},"finish_reason":null}]}
+                
+                data: [DONE]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Research Endpoints
+  /api/v1/research/deep-dive:
+    post:
+      tags: [Research]
+      summary: Perform deep research
+      description: |
+        Conduct comprehensive research on complex topics using web search
+        and document analysis. Supports multiple methodologies and depth levels.
+      operationId: researchDeepDive
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResearchRequest'
+            examples:
+              systematic_research:
+                summary: Systematic research
+                value:
+                  research_question: "What are the latest developments in quantum computing for 2024?"
+                  methodology: "systematic"
+                  time_budget: 300
+                  cost_budget: 0.50
+                  sources: ["web", "academic"]
+                  depth_level: 3
+              comparative_analysis:
+                summary: Comparative analysis
+                value:
+                  research_question: "Compare the effectiveness of different renewable energy sources"
+                  methodology: "comparative"
+                  time_budget: 180
+                  cost_budget: 0.30
+                  depth_level: 2
+      responses:
+        '200':
+          description: Research completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResearchResponse'
+              examples:
+                research_result:
+                  summary: Successful research response
+                  value:
+                    status: "success"
+                    data:
+                      research_findings: "Based on comprehensive analysis of 23 sources, quantum computing in 2024 has seen major breakthroughs..."
+                      sources_consulted: 23
+                      academic_papers: 8
+                      web_sources: 15
+                      confidence_score: 0.94
+                      methodology_used: "systematic"
+                    metadata:
+                      query_id: "research_001"
+                      execution_time: 45.2
+                      cost: 0.35
+                      models_used: ["phi3:mini", "llama3.2"]
+                      confidence: 0.94
+                      cached: false
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '408':
+          $ref: '#/components/responses/RequestTimeout'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Search Endpoints
+  /api/v1/search/basic:
+    post:
+      tags: [Search]
+      summary: Basic web search
+      description: Perform basic web search with AI summarization
+      operationId: searchBasic
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              basic_search:
+                summary: Basic web search
+                value:
+                  query: "artificial intelligence trends 2024"
+                  max_results: 10
+                  search_type: "web"
+                  include_summary: true
+                  budget: 2.0
+                  quality: "standard"
+      responses:
+        '200':
+          description: Search completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/search/advanced:
+    post:
+      tags: [Search]
+      summary: Advanced web search
+      description: Advanced search with filtering, quality controls, and comprehensive analysis
+      operationId: searchAdvanced
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedSearchRequest'
+            examples:
+              advanced_search:
+                summary: Advanced search with filters
+                value:
+                  query: "machine learning research papers 2024"
+                  max_results: 20
+                  search_type: "academic"
+                  quality_requirement: "high"
+                  budget: 5.0
+                  include_content: true
+                  filters:
+                    date_range: "2024"
+                    paper_type: "research"
+                  domains: ["arxiv.org", "ieee.org"]
+                  timeout: 120
+      responses:
+        '200':
+          description: Advanced search completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Document Search Service Endpoints
+  /api/v2/documents/upload:
+    post:
+      tags: [Documents]
+      summary: Upload document for indexing
+      description: |
+        Upload and index documents for search and RAG functionality.
+        Supports multiple formats including PDF, Word, text, and more.
+      operationId: uploadDocument
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DocumentUploadRequest'
+            examples:
+              pdf_upload:
+                summary: Upload PDF with metadata
+                value:
+                  file: "research_paper.pdf"
+                  metadata: |
+                    {
+                      "category": "research",
+                      "tags": ["AI", "machine learning"],
+                      "author": "Dr. Smith",
+                      "date": "2024-01-15"
+                    }
+      responses:
+        '200':
+          description: Document uploaded and indexed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentUploadResponse'
+              examples:
+                upload_success:
+                  summary: Successful upload
+                  value:
+                    status: "success"
+                    document_id: "doc_abc123"
+                    message: "Document uploaded and indexed successfully"
+                    indexing_time_ms: 1250.5
+                    metadata:
+                      file_size: 2048576
+                      page_count: 12
+                      content_length: 15000
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '413':
+          description: File too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: "error"
+                message: "File size exceeds maximum limit of 100MB"
+                error_code: "FILE_TOO_LARGE"
+        '415':
+          description: Unsupported file type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: "error"
+                message: "Unsupported file type"
+                error_code: "UNSUPPORTED_FILE_TYPE"
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v2/search/ultra-fast:
+    post:
+      tags: [Documents]
+      summary: Ultra-fast document search
+      description: |
+        High-performance document search using advanced algorithms including
+        HNSW indexing, LambdaMART ML ranking, and hybrid search capabilities.
+      operationId: ultraFastSearch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UltraFastSearchRequest'
+            examples:
+              hybrid_search:
+                summary: Hybrid search with content
+                value:
+                  query: "machine learning optimization techniques"
+                  max_results: 10
+                  search_type: "hybrid"
+                  include_content: true
+                  similarity_threshold: 0.7
+              semantic_search:
+                summary: Semantic-only search
+                value:
+                  query: "neural network architectures"
+                  max_results: 5
+                  search_type: "semantic"
+                  include_content: false
+      responses:
+        '200':
+          description: Search completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UltraFastSearchResponse'
+              examples:
+                search_results:
+                  summary: Successful search results
+                  value:
+                    status: "success"
+                    results:
+                      - document_id: "doc_123"
+                        title: "Advanced ML Algorithms"
+                        content: "Machine learning algorithms are computational methods..."
+                        score: 0.95
+                        similarity: 0.92
+                        bm25_score: 0.88
+                        metadata:
+                          document_type: "pdf"
+                          page_count: 25
+                          creation_date: "2024-01-01"
+                    search_metadata:
+                      total_results: 1
+                      search_time_ms: 125.1
+                      algorithm_used: "lambdamart"
+                      index_type: "hnsw_ivf_pq"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v2/rag/query:
+    post:
+      tags: [RAG]
+      summary: RAG query with documents
+      description: |
+        Perform Retrieval Augmented Generation using uploaded documents
+        as context for AI responses. Combines document search with generation.
+      operationId: ragQuery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RAGQueryRequest'
+            examples:
+              rag_question:
+                summary: RAG question with sources
+                value:
+                  query: "What are the benefits of transformer models?"
+                  max_context_length: 4000
+                  temperature: 0.7
+                  include_sources: true
+      responses:
+        '200':
+          description: RAG query completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RAGQueryResponse'
+              examples:
+                rag_result:
+                  summary: Successful RAG response
+                  value:
+                    status: "success"
+                    answer: "Transformer models offer several key benefits including attention mechanisms..."
+                    sources:
+                      - document_id: "doc_456"
+                        title: "Attention Is All You Need"
+                        relevance_score: 0.94
+                        content_snippet: "The Transformer model relies entirely on attention mechanisms..."
+                    confidence: 0.91
+                    generation_metadata:
+                      model_used: "phi3:mini"
+                      tokens_generated: 245
+                      context_documents: 3
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Model Management
+  /api/v1/models/list:
+    get:
+      tags: [Models]
+      summary: List available AI models
+      description: Get list of available AI models and their status
+      operationId: listModels
+      responses:
+        '200':
+          description: Models listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelListResponse'
+              examples:
+                model_list:
+                  summary: Available models
+                  value:
+                    status: "success"
+                    data:
+                      models:
+                        - name: "phi3:mini"
+                          size: "3.8GB"
+                          status: "ready"
+                          capabilities: ["chat", "code", "analysis"]
+                        - name: "llama3.2"
+                          size: "7.4GB"
+                          status: "ready"
+                          capabilities: ["chat", "reasoning"]
+                      total_models: 2
+                      loaded_models: 2
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/models/download:
+    post:
+      tags: [Models]
+      summary: Download AI model
+      description: Download and install a new AI model
+      operationId: downloadModel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelDownloadRequest'
+            examples:
+              download_model:
+                summary: Download model request
+                value:
+                  model_name: "llama3.2:8b"
+                  priority: "high"
+      responses:
+        '202':
+          description: Model download started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDownloadResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Health and Monitoring
+  /health:
+    get:
+      tags: [Monitoring]
+      summary: System health check
+      description: Comprehensive health check for all system components
+      operationId: healthCheck
+      responses:
+        '200':
+          description: System health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              examples:
+                healthy_system:
+                  summary: Healthy system
+                  value:
+                    status: "healthy"
+                    components:
+                      models: "healthy"
+                      cache: "healthy"
+                      chat_graph: "healthy"
+                      search_graph: "healthy"
+                      optimization_system: "healthy"
+                      brave_search: "configured"
+                      scrapingbee: "configured"
+                    version: "1.0.0"
+                    uptime: 3661.5
+        '503':
+          description: System unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              examples:
+                unhealthy_system:
+                  summary: Unhealthy system
+                  value:
+                    status: "degraded"
+                    components:
+                      models: "unhealthy: connection failed"
+                      cache: "healthy"
+                      chat_graph: "not_initialized"
+                    version: "1.0.0"
+
+  /health/ready:
+    get:
+      tags: [Monitoring]
+      summary: Readiness probe
+      description: Kubernetes readiness probe endpoint
+      operationId: readinessCheck
+      responses:
+        '200':
+          description: Service is ready
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ready"
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /health/live:
+    get:
+      tags: [Monitoring]
+      summary: Liveness probe
+      description: Kubernetes liveness probe endpoint
+      operationId: livenessCheck
+      responses:
+        '200':
+          description: Service is alive
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "alive"
+
+  /metrics:
+    get:
+      tags: [Monitoring]
+      summary: System metrics
+      description: Get comprehensive system performance metrics
+      operationId: getMetrics
+      responses:
+        '200':
+          description: System metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResponse'
+              examples:
+                system_metrics:
+                  summary: System performance metrics
+                  value:
+                    status: "operational"
+                    timestamp: 1640995200
+                    correlation_id: "metrics_abc123"
+                    version: "1.0.0"
+                    uptime_seconds: 3661.5
+                    components:
+                      model_manager:
+                        type: "ModelManager"
+                        status: "operational"
+                      cache_manager:
+                        type: "CacheManager"
+                        available: true
+                    api_keys:
+                      brave_search: true
+                      scrapingbee: true
+                    system:
+                      total_components: 6
+                      environment: "production"
+                      python_version: "3.10"
+
+  # Analytics
+  /api/v1/analytics/usage:
+    get:
+      tags: [Analytics]
+      summary: Get usage statistics
+      description: Get comprehensive usage analytics and cost information
+      operationId: getUsageStats
+      responses:
+        '200':
+          description: Usage statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageStatsResponse'
+              examples:
+                usage_stats:
+                  summary: User usage statistics
+                  value:
+                    status: "success"
+                    data:
+                      requests_today: 150
+                      requests_this_month: 4200
+                      cost_today: 12.50
+                      cost_this_month: 380.25
+                      budget_remaining: 119.75
+                      top_endpoints:
+                        - endpoint: "/chat/complete"
+                          count: 89
+                        - endpoint: "/research/deep-dive"
+                          count: 34
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+# Component Schemas
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key authentication. Format: `Bearer <your-api-key>`
+
+  schemas:
+    # Request Schemas
+    ChatRequest:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 8000
+          description: User message content
+          example: "Explain machine learning concepts"
+        session_id:
+          type: string
+          description: Conversation session identifier
+          example: "user_session_123"
+        quality_requirement:
+          type: string
+          enum: [minimal, balanced, high, premium]
+          default: balanced
+          description: Response quality level
+          example: "balanced"
+        max_cost:
+          type: number
+          minimum: 0.01
+          maximum: 1.0
+          default: 0.10
+          description: Maximum cost limit in INR
+          example: 0.10
+        max_execution_time:
+          type: number
+          minimum: 1.0
+          maximum: 120.0
+          default: 30.0
+          description: Maximum execution time in seconds
+          example: 30.0
+        force_local_only:
+          type: boolean
+          default: false
+          description: Force local model usage only
+        response_style:
+          type: string
+          enum: [concise, balanced, detailed]
+          default: balanced
+          description: Response verbosity style
+        include_sources:
+          type: boolean
+          default: true
+          description: Include source citations
+        include_debug_info:
+          type: boolean
+          default: false
+          description: Include debug information
+
+    ChatStreamRequest:
+      type: object
+      required: [messages]
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+          description: Conversation messages
+        session_id:
+          type: string
+          description: Session identifier
+        model:
+          type: string
+          default: "auto"
+          description: Preferred model
+        max_tokens:
+          type: integer
+          minimum: 1
+          maximum: 4000
+          default: 300
+          description: Maximum tokens to generate
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 2
+          default: 0.7
+          description: Sampling temperature
+        stream:
+          type: boolean
+          default: true
+          description: Enable streaming
+
+    ChatMessage:
+      type: object
+      required: [role, content]
+      properties:
+        role:
+          type: string
+          enum: [user, assistant, system]
+          description: Message role
+        content:
+          type: string
+          description: Message content
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional message metadata
+
+    ResearchRequest:
+      type: object
+      required: [research_question]
+      properties:
+        research_question:
+          type: string
+          minLength: 10
+          maxLength: 1000
+          description: Research question or topic
+          example: "What are the latest AI developments in 2024?"
+        methodology:
+          type: string
+          enum: [systematic, exploratory, comparative, meta-analysis]
+          default: systematic
+          description: Research methodology
+        time_budget:
+          type: integer
+          minimum: 60
+          maximum: 600
+          default: 300
+          description: Time budget in seconds
+        cost_budget:
+          type: number
+          minimum: 0.10
+          maximum: 2.0
+          default: 0.50
+          description: Cost budget in INR
+        sources:
+          type: array
+          items:
+            type: string
+            enum: [web, academic, documents]
+          default: [web, academic]
+          description: Research sources to use
+        depth_level:
+          type: integer
+          minimum: 1
+          maximum: 5
+          default: 3
+          description: Research depth level
+
+    SearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Search query
+        max_results:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 10
+          description: Maximum number of results
+        search_type:
+          type: string
+          enum: [web, academic, news]
+          default: web
+          description: Type of search
+        include_summary:
+          type: boolean
+          default: true
+          description: Include AI summary
+        budget:
+          type: number
+          minimum: 0.1
+          maximum: 10.0
+          default: 2.0
+          description: Search budget in INR
+        quality:
+          type: string
+          enum: [basic, standard, premium]
+          default: standard
+          description: Search quality level
+        session_id:
+          type: string
+          description: Session identifier
+
+    AdvancedSearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Search query
+        max_results:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 10
+        search_type:
+          type: string
+          enum: [web, academic, news, comprehensive]
+          default: comprehensive
+        quality_requirement:
+          type: string
+          enum: [minimal, balanced, high, premium]
+          default: high
+        budget:
+          type: number
+          minimum: 0.1
+          maximum: 20.0
+          default: 5.0
+        include_content:
+          type: boolean
+          default: true
+        include_summary:
+          type: boolean
+          default: true
+        filters:
+          type: object
+          additionalProperties: true
+          description: Search filters
+        domains:
+          type: array
+          items:
+            type: string
+          description: Specific domains to search
+        timeout:
+          type: integer
+          minimum: 10
+          maximum: 300
+          default: 60
+          description: Timeout in seconds
+
+    DocumentUploadRequest:
+      type: object
+      required: [file]
+      properties:
+        file:
+          type: string
+          format: binary
+          description: Document file to upload
+        metadata:
+          type: string
+          description: JSON metadata for the document
+          example: '{"category":"research","tags":["AI","ML"]}'
+
+    UltraFastSearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Search query
+        max_results:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 10
+        search_type:
+          type: string
+          enum: [keyword, semantic, hybrid]
+          default: hybrid
+          description: Search algorithm type
+        include_content:
+          type: boolean
+          default: true
+          description: Include document content
+        similarity_threshold:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.7
+          description: Minimum similarity threshold
+
+    RAGQueryRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          description: Question or query for RAG
+        max_context_length:
+          type: integer
+          minimum: 1000
+          maximum: 8000
+          default: 4000
+          description: Maximum context length
+        temperature:
+          type: number
+          minimum: 0.0
+          maximum: 2.0
+          default: 0.7
+          description: Generation temperature
+        include_sources:
+          type: boolean
+          default: true
+          description: Include source documents
+
+    ModelDownloadRequest:
+      type: object
+      required: [model_name]
+      properties:
+        model_name:
+          type: string
+          description: Name of model to download
+          example: "llama3.2:8b"
+        priority:
+          type: string
+          enum: [low, normal, high]
+          default: normal
+          description: Download priority
+
+    # Response Schemas
+    BaseResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [success, error, partial]
+          description: Response status
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+        cost_prediction:
+          $ref: '#/components/schemas/CostPrediction'
+        developer_hints:
+          $ref: '#/components/schemas/DeveloperHints'
+
+    ResponseMetadata:
+      type: object
+      required: [query_id, correlation_id, execution_time, cost, models_used, confidence, cached, timestamp]
+      properties:
+        query_id:
+          type: string
+          description: Unique query identifier
+        correlation_id:
+          type: string
+          description: Request correlation ID
+        execution_time:
+          type: number
+          description: Execution time in seconds
+        cost:
+          type: number
+          description: Total cost in INR
+        models_used:
+          type: array
+          items:
+            type: string
+          description: Models used in processing
+        confidence:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+          description: Overall confidence score
+        cached:
+          type: boolean
+          description: Whether response was cached
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp
+
+    CostPrediction:
+      type: object
+      properties:
+        estimated_cost:
+          type: number
+          description: Estimated total cost
+        cost_breakdown:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostBreakdown'
+        savings_tips:
+          type: array
+          items:
+            type: string
+          description: Cost optimization suggestions
+
+    CostBreakdown:
+      type: object
+      properties:
+        step:
+          type: string
+          description: Processing step name
+        service:
+          type: string
+          description: Service or model used
+        cost:
+          type: number
+          description: Cost for this step
+
+    DeveloperHints:
+      type: object
+      properties:
+        suggested_next_queries:
+          type: array
+          items:
+            type: string
+          description: Suggested follow-up queries
+        potential_optimizations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Performance optimization suggestions
+        routing_explanation:
+          type: string
+          description: Routing decision explanation
+        execution_path:
+          type: array
+          items:
+            type: string
+          description: Execution path taken
+
+    ChatResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          required: [data]
+          properties:
+            data:
+              $ref: '#/components/schemas/ChatData'
+
+    ChatData:
+      type: object
+      required: [response, session_id]
+      properties:
+        response:
+          type: string
+          description: Generated response text
+        session_id:
+          type: string
+          description: Conversation session ID
+        context:
+          $ref: '#/components/schemas/ConversationContext'
+        sources:
+          type: array
+          items:
+            type: object
+          description: Sources used in response
+        citations:
+          type: array
+          items:
+            type: string
+          description: Citation references
+
+    ConversationContext:
+      type: object
+      properties:
+        session_id:
+          type: string
+        message_count:
+          type: integer
+        last_updated:
+          type: string
+          format: date-time
+        user_preferences:
+          type: object
+          additionalProperties: true
+
+    ResearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          required: [data]
+          properties:
+            data:
+              type: object
+              properties:
+                research_findings:
+                  type: string
+                  description: Comprehensive research findings
+                sources_consulted:
+                  type: integer
+                  description: Number of sources consulted
+                academic_papers:
+                  type: integer
+                  description: Number of academic papers reviewed
+                web_sources:
+                  type: integer
+                  description: Number of web sources consulted
+                confidence_score:
+                  type: number
+                  minimum: 0.0
+                  maximum: 1.0
+                methodology_used:
+                  type: string
+
+    SearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          required: [data]
+          properties:
+            data:
+              type: object
+              properties:
+                query:
+                  type: string
+                results:
+                  type: array
+                  items:
+                    type: object
+                summary:
+                  type: string
+                total_results:
+                  type: integer
+                search_time:
+                  type: number
+
+    DocumentUploadResponse:
+      type: object
+      required: [status, document_id]
+      properties:
+        status:
+          type: string
+          enum: [success, error]
+        document_id:
+          type: string
+          description: Unique document identifier
+        message:
+          type: string
+          description: Status message
+        indexing_time_ms:
+          type: number
+          description: Indexing time in milliseconds
+        metadata:
+          type: object
+          properties:
+            file_size:
+              type: integer
+            page_count:
+              type: integer
+            content_length:
+              type: integer
+
+    UltraFastSearchResponse:
+      type: object
+      required: [status, results]
+      properties:
+        status:
+          type: string
+          enum: [success, error]
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              document_id:
+                type: string
+              title:
+                type: string
+              content:
+                type: string
+              score:
+                type: number
+              similarity:
+                type: number
+              bm25_score:
+                type: number
+              metadata:
+                type: object
+                additionalProperties: true
+        search_metadata:
+          type: object
+          properties:
+            total_results:
+              type: integer
+            search_time_ms:
+              type: number
+            algorithm_used:
+              type: string
+            index_type:
+              type: string
+
+    RAGQueryResponse:
+      type: object
+      required: [status, answer]
+      properties:
+        status:
+          type: string
+          enum: [success, error]
+        answer:
+          type: string
+          description: Generated answer
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              document_id:
+                type: string
+              title:
+                type: string
+              relevance_score:
+                type: number
+              content_snippet:
+                type: string
+        confidence:
+          type: number
+          minimum: 0.0
+          maximum: 1.0
+        generation_metadata:
+          type: object
+          properties:
+            model_used:
+              type: string
+            tokens_generated:
+              type: integer
+            context_documents:
+              type: integer
+
+    ModelListResponse:
+      type: object
+      required: [status, data]
+      properties:
+        status:
+          type: string
+          enum: [success, error]
+        data:
+          type: object
+          properties:
+            models:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  size:
+                    type: string
+                  status:
+                    type: string
+                    enum: [ready, loading, error]
+                  capabilities:
+                    type: array
+                    items:
+                      type: string
+            total_models:
+              type: integer
+            loaded_models:
+              type: integer
+
+    ModelDownloadResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [accepted, error]
+        message:
+          type: string
+        download_id:
+          type: string
+        estimated_time:
+          type: integer
+          description: Estimated download time in seconds
+
+    HealthResponse:
+      type: object
+      required: [status, components, version]
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+        components:
+          type: object
+          additionalProperties:
+            type: string
+          description: Component health status
+        version:
+          type: string
+        uptime:
+          type: number
+          description: Uptime in seconds
+        last_check:
+          type: string
+          format: date-time
+
+    MetricsResponse:
+      type: object
+      required: [status, timestamp]
+      properties:
+        status:
+          type: string
+        timestamp:
+          type: number
+        correlation_id:
+          type: string
+        version:
+          type: string
+        uptime_seconds:
+          type: number
+        components:
+          type: object
+          additionalProperties: true
+        api_keys:
+          type: object
+          additionalProperties:
+            type: boolean
+        system:
+          type: object
+          properties:
+            total_components:
+              type: integer
+            environment:
+              type: string
+            python_version:
+              type: string
+
+    UsageStatsResponse:
+      type: object
+      required: [status, data]
+      properties:
+        status:
+          type: string
+        data:
+          type: object
+          properties:
+            requests_today:
+              type: integer
+            requests_this_month:
+              type: integer
+            cost_today:
+              type: number
+            cost_this_month:
+              type: number
+            budget_remaining:
+              type: number
+            top_endpoints:
+              type: array
+              items:
+                type: object
+                properties:
+                  endpoint:
+                    type: string
+                  count:
+                    type: integer
+
+    ErrorResponse:
+      type: object
+      required: [status, message]
+      properties:
+        status:
+          type: string
+          enum: [error]
+        message:
+          type: string
+          description: Error message
+        error_code:
+          type: string
+          description: Machine-readable error code
+        query_id:
+          type: string
+          description: Query ID for tracking
+        correlation_id:
+          type: string
+          description: Correlation ID for tracing
+        timestamp:
+          type: string
+          format: date-time
+        error_details:
+          type: object
+          properties:
+            error_type:
+              type: string
+            technical_details:
+              type: string
+            suggestions:
+              type: array
+              items:
+                type: string
+            retry_after:
+              type: integer
+
+  # Common Responses
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            validation_error:
+              summary: Validation error
+              value:
+                status: "error"
+                message: "Invalid request parameters"
+                error_code: "VALIDATION_ERROR"
+                timestamp: "2024-01-01T10:00:00Z"
+
+    Unauthorized:
+      description: Unauthorized - invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Unauthorized access
+              value:
+                status: "error"
+                message: "Invalid or missing API key"
+                error_code: "UNAUTHORIZED"
+                timestamp: "2024-01-01T10:00:00Z"
+
+    InsufficientBudget:
+      description: Payment required - insufficient budget
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            budget_exceeded:
+              summary: Budget exceeded
+              value:
+                status: "error"
+                message: "Insufficient budget for this request"
+                error_code: "INSUFFICIENT_BUDGET"
+                timestamp: "2024-01-01T10:00:00Z"
+
+    RateLimitExceeded:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            rate_limit:
+              summary: Rate limit exceeded
+              value:
+                status: "error"
+                message: "Rate limit exceeded"
+                error_code: "RATE_LIMIT_EXCEEDED"
+                error_details:
+                  retry_after: 60
+                timestamp: "2024-01-01T10:00:00Z"
+
+    RequestTimeout:
+      description: Request timeout
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            timeout:
+              summary: Request timeout
+              value:
+                status: "error"
+                message: "Request timed out"
+                error_code: "REQUEST_TIMEOUT"
+                timestamp: "2024-01-01T10:00:00Z"
+
+    ServiceUnavailable:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            service_down:
+              summary: Service unavailable
+              value:
+                status: "error"
+                message: "Service temporarily unavailable"
+                error_code: "SERVICE_UNAVAILABLE"
+                timestamp: "2024-01-01T10:00:00Z"
+
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            server_error:
+              summary: Internal server error
+              value:
+                status: "error"
+                message: "Internal server error occurred"
+                error_code: "INTERNAL_SERVER_ERROR"
+                timestamp: "2024-01-01T10:00:00Z"
+
+# Security
+security:
+  - ApiKeyAuth: []

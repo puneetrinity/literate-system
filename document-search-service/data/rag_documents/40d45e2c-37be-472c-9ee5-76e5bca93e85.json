@@ -1,0 +1,57 @@
+{
+  "document": {
+    "id": "40d45e2c-37be-472c-9ee5-76e5bca93e85",
+    "filename": "resume3.txt",
+    "content_type": ".txt",
+    "file_size": 790,
+    "metadata": {
+      "title": "resume3.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T18:03:02.630765",
+    "processed_date": "2025-07-20T18:03:02.630734",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "MIKE CHEN - Data Scientist & ML Engineer EXPERIENCE: - 6 years data science and machine learning experience - Python expert: pandas, numpy, matplotlib, seaborn - Deep Learning: TensorFlow, Keras, PyTorch - MLOps: MLflow, Kubeflow, model deployment pipelines - Built fraud detection system reducing losses by 30% - Research background in computer vision and NLP EDUCATION: - Ph.D. Computer Science, Carnegie Mellon (2017) - M.S. Statistics, UC Berkeley (2015) PROJECTS: - Developed real-time fraud detection using ensemble methods - Created customer churn prediction model (92% accuracy) - Built computer vision system for quality control in manufacturing - Published 8 papers on machine learning in top-tier conferences SKILLS: Python, R, ML, Deep Learning, Statistics, Research, MLOps",
+  "chunks": [
+    {
+      "chunk_id": "54da50ed-26a7-4a2e-a15a-60dd96587e40",
+      "content": "MIKE CHEN - Data Scientist & ML Engineer EXPERIENCE: - 6 years data science and machine learning experience - Python expert: pandas, numpy, matplotlib, seaborn - Deep Learning: TensorFlow, Keras, PyTorch - MLOps: MLflow, Kubeflow, model deployment pipelines - Built fraud detection system reducing losses by 30% - Research background in computer vision and NLP EDUCATION: - Ph D Computer Science, Carnegie Mellon (2017) - M S",
+      "metadata": {
+        "source_filename": "resume3.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "40d45e2c-37be-472c-9ee5-76e5bca93e85",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T18:03:02.631052",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "45b029a8-07f1-4ab3-bb8b-5a53801e99ee",
+      "content": "h D Computer Science, Carnegie Mellon (2017) - M S Statistics, UC Berkeley (2015) PROJECTS: - Developed real-time fraud detection using ensemble methods - Created customer churn prediction model (92% accuracy) - Built computer vision system for quality control in manufacturing - Published 8 papers on machine learning in top-tier conferences SKILLS: Python, R, ML, Deep Learning, Statistics, Research, MLOps",
+      "metadata": {
+        "source_filename": "resume3.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "40d45e2c-37be-472c-9ee5-76e5bca93e85",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T18:03:02.631069",
+      "embedding_shape": null
+    }
+  ]
+}

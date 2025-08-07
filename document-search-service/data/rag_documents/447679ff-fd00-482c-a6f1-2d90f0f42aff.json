@@ -1,0 +1,74 @@
+{
+  "document": {
+    "id": "447679ff-fd00-482c-a6f1-2d90f0f42aff",
+    "filename": "claude_rag_test.txt",
+    "content_type": ".txt",
+    "file_size": 869,
+    "metadata": {
+      "title": "claude_rag_test.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T08:42:58.620870",
+    "processed_date": "2025-07-20T08:42:58.620821",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Claude RAG System Test Document This document is designed to test the Retrieval-Augmented Generation (RAG) system functionality. The RAG system combines several key components: 1. Document processing and chunking 2. Vector embeddings using sentence transformers 3. Similarity search for semantic matching 4. Keyword-based fallback search Key Features to Test: - Document upload and processing - Semantic similarity search - Keyword matching capabilities - Chunk retrieval and ranking Technical Implementation: The system uses SentenceTransformer models for embedding generation, FAISS for vector indexing, and SQLite for document storage. The enhanced engine provides both semantic and keyword search capabilities. Test Queries: This document should be found when searching for terms like RAG system, document processing, embedding, similarity search, or Claude.",
+  "chunks": [
+    {
+      "chunk_id": "c48d365a-61c3-4a8a-a8e8-c161b2016499",
+      "content": "Claude RAG System Test Document This document is designed to test the Retrieval-Augmented Generation (RAG) system functionality The RAG system combines several key components: 1 Document processing and chunking 2 Vector embeddings using sentence transformers 3 Similarity search for semantic matching 4",
+      "metadata": {
+        "source_filename": "claude_rag_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "447679ff-fd00-482c-a6f1-2d90f0f42aff",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T08:42:58.621899",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "c6ead02b-8419-4126-aa11-89de97cfd27b",
+      "content": "ormers 3 Similarity search for semantic matching 4 Keyword-based fallback search Key Features to Test: - Document upload and processing - Semantic similarity search - Keyword matching capabilities - Chunk retrieval and ranking Technical Implementation: The system uses SentenceTransformer models for embedding generation, FAISS for vector indexing, and SQLite for document storage The enhanced engine provides both semantic and keyword search capabilities",
+      "metadata": {
+        "source_filename": "claude_rag_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "447679ff-fd00-482c-a6f1-2d90f0f42aff",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T08:42:58.621928",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "96127bfd-cdd4-4fc4-a487-8e5e4a72c4f5",
+      "content": "ides both semantic and keyword search capabilities Test Queries: This document should be found when searching for terms like RAG system, document processing, embedding, similarity search, or Claude",
+      "metadata": {
+        "source_filename": "claude_rag_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "447679ff-fd00-482c-a6f1-2d90f0f42aff",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T08:42:58.621946",
+      "embedding_shape": null
+    }
+  ]
+}

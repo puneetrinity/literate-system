@@ -1,0 +1,232 @@
+{
+  "timestamp": "2025-07-29 06:43:28",
+  "rag_accuracy": {
+    "individual_results": [
+      {
+        "query": "test document",
+        "expected_docs": [
+          "search_test.txt",
+          "test_document.txt",
+          "comprehensive_test.txt",
+          "test.txt"
+        ],
+        "retrieved_docs": [
+          "search_test.txt",
+          "test_document.txt",
+          "comprehensive_test.txt",
+          "test.txt"
+        ],
+        "total_chunks": 5,
+        "relevant_chunks": 5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "precision@5": 1.0,
+        "precision@10": 1.0,
+        "processing_time_ms": 31.969547271728516,
+        "success": true
+      },
+      {
+        "query": "search test",
+        "expected_docs": [
+          "search_test.txt"
+        ],
+        "retrieved_docs": [
+          "search_test.txt",
+          "test_rag_pipeline.pdf",
+          "claude_rag_test.txt"
+        ],
+        "total_chunks": 5,
+        "relevant_chunks": 5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "precision@5": 0.3333333333333333,
+        "precision@10": 0.3333333333333333,
+        "processing_time_ms": 27.350425720214844,
+        "success": true
+      },
+      {
+        "query": "RAG system",
+        "expected_docs": [
+          "search_test.txt",
+          "test_document.txt"
+        ],
+        "retrieved_docs": [
+          "search_test.txt",
+          "claude_rag_test.txt",
+          "test_document.txt",
+          "test_rag_pipeline.pdf",
+          "final_test.txt"
+        ],
+        "total_chunks": 5,
+        "relevant_chunks": 5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "precision@5": 0.4,
+        "precision@10": 0.4,
+        "processing_time_ms": 27.40311622619629,
+        "success": true
+      },
+      {
+        "query": "document processing",
+        "expected_docs": [
+          "search_test.txt",
+          "comprehensive_test.txt"
+        ],
+        "retrieved_docs": [
+          "search_test.txt",
+          "test_rag_pipeline.pdf",
+          "comprehensive_test.txt",
+          "claude_rag_test.txt"
+        ],
+        "total_chunks": 5,
+        "relevant_chunks": 5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "precision@5": 0.5,
+        "precision@10": 0.5,
+        "processing_time_ms": 27.130603790283203,
+        "success": true
+      },
+      {
+        "query": "upload functionality",
+        "expected_docs": [
+          "test_document.txt",
+          "comprehensive_test.txt"
+        ],
+        "retrieved_docs": [
+          "comprehensive_test.txt",
+          "test_document.txt",
+          "verify.txt",
+          "test_chunked.txt",
+          "search_test.txt"
+        ],
+        "total_chunks": 5,
+        "relevant_chunks": 5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "precision@5": 0.4,
+        "precision@10": 0.4,
+        "processing_time_ms": 27.135372161865234,
+        "success": true
+      }
+    ],
+    "overall_metrics": {
+      "avg_recall@5": 1.0,
+      "avg_recall@10": 1.0,
+      "avg_precision@5": 0.527,
+      "avg_precision@10": 0.527,
+      "avg_processing_time_ms": 28.2,
+      "total_queries": 5,
+      "successful_queries": 5,
+      "success_rate": 1.0
+    }
+  },
+  "search_coverage": {
+    "exact_match": {
+      "queries": [
+        {
+          "query": "test",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        },
+        {
+          "query": "document",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        },
+        {
+          "query": "search",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        }
+      ],
+      "total_queries": 3,
+      "rag_coverage": 1.0,
+      "ultra_fast_coverage": 0.0,
+      "avg_rag_results": 5.0,
+      "avg_ultra_fast_results": 0.0
+    },
+    "semantic": {
+      "queries": [
+        {
+          "query": "artificial intelligence",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        },
+        {
+          "query": "machine learning",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        },
+        {
+          "query": "data processing",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        }
+      ],
+      "total_queries": 3,
+      "rag_coverage": 1.0,
+      "ultra_fast_coverage": 0.0,
+      "avg_rag_results": 5.0,
+      "avg_ultra_fast_results": 0.0
+    },
+    "compound": {
+      "queries": [
+        {
+          "query": "test document upload",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        },
+        {
+          "query": "search functionality testing",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        }
+      ],
+      "total_queries": 2,
+      "rag_coverage": 1.0,
+      "ultra_fast_coverage": 0.0,
+      "avg_rag_results": 5.0,
+      "avg_ultra_fast_results": 0.0
+    },
+    "domain_specific": {
+      "queries": [
+        {
+          "query": "RAG system implementation",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        },
+        {
+          "query": "document processing pipeline",
+          "rag_success": true,
+          "ultra_fast_success": false,
+          "rag_results_count": 5,
+          "ultra_fast_results_count": 0
+        }
+      ],
+      "total_queries": 2,
+      "rag_coverage": 1.0,
+      "ultra_fast_coverage": 0.0,
+      "avg_rag_results": 5.0,
+      "avg_ultra_fast_results": 0.0
+    }
+  }
+}

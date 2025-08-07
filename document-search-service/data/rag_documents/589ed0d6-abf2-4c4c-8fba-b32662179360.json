@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "589ed0d6-abf2-4c4c-8fba-b32662179360",
+    "filename": "test_upload.txt",
+    "content_type": ".txt",
+    "file_size": 133,
+    "metadata": {
+      "title": "test_upload.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T10:39:09.490436",
+    "processed_date": "2025-07-20T10:39:09.490388",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "This is a test document for validating the full RAG pipeline functionality. It should be processed, chunked, and indexed for search.",
+  "chunks": [
+    {
+      "chunk_id": "88757276-8c9c-44b5-921d-dbc63b5b4f70",
+      "content": "This is a test document for validating the full RAG pipeline functionality It should be processed, chunked, and indexed for search",
+      "metadata": {
+        "source_filename": "test_upload.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "589ed0d6-abf2-4c4c-8fba-b32662179360",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T10:39:09.491459",
+      "embedding_shape": null
+    }
+  ]
+}

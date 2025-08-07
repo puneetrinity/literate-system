@@ -1,0 +1,23 @@
+Test Document for Upload Verification
+
+This is a test document to verify that the document upload functionality works correctly with our unified AI search system.
+
+Content:
+- This document contains sample text for testing
+- It should be processed by the RAG system
+- The document will be chunked and indexed
+- We can then search for this content through the unified search API
+
+Technologies mentioned:
+- FastAPI for the REST API
+- Vector databases for semantic search
+- RAG (Retrieval Augmented Generation) for enhanced responses
+- Circuit breakers for fault tolerance
+
+Key Features:
+- Multi-modal search capabilities
+- Unified endpoint combining document and chunk search
+- Production-grade reliability with monitoring
+- Graceful degradation when components fail
+
+This document serves as a test case to ensure our document upload and indexing pipeline works end-to-end.

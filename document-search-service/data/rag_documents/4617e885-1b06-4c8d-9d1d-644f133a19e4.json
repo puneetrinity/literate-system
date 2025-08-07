@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "4617e885-1b06-4c8d-9d1d-644f133a19e4",
+    "filename": "ui_test.txt",
+    "content_type": ".txt",
+    "file_size": 13,
+    "metadata": {
+      "title": "ui_test.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-17T13:53:11.394594",
+    "processed_date": "2025-07-17T13:53:11.394553",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Test content",
+  "chunks": [
+    {
+      "chunk_id": "e4e7a981-78fa-487e-81fc-db1ccf69f16a",
+      "content": "Test content",
+      "metadata": {
+        "source_filename": "ui_test.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "4617e885-1b06-4c8d-9d1d-644f133a19e4",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T13:53:11.394938",
+      "embedding_shape": null
+    }
+  ]
+}

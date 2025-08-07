@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "a1fb198e-91f3-41eb-b65d-44b8f9d3089a",
+    "filename": "Puneet Resume.docx",
+    "content_type": ".docx",
+    "file_size": 9499,
+    "metadata": {
+      "title": "Puneet Resume.docx",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-20T18:12:20.628222",
+    "processed_date": "2025-07-20T18:12:20.628177",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Error: Could not extract text from DOCX",
+  "chunks": [
+    {
+      "chunk_id": "5e49f97a-3143-42c1-8db3-dc332c18324c",
+      "content": "Error: Could not extract text from DOCX",
+      "metadata": {
+        "source_filename": "Puneet Resume.docx",
+        "source_content_type": ".docx",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "a1fb198e-91f3-41eb-b65d-44b8f9d3089a",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-20T18:12:20.628596",
+      "embedding_shape": null
+    }
+  ]
+}

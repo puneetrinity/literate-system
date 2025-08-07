@@ -1,0 +1,40 @@
+{
+  "document": {
+    "id": "8c653a9b-eede-4f7b-aad0-1dfba29d6ce8",
+    "filename": "test_upload.txt",
+    "content_type": ".txt",
+    "file_size": 33,
+    "metadata": {
+      "title": "test_upload.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-18T18:38:26.872309",
+    "processed_date": "2025-07-18T18:38:26.872263",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "This is a test document content.",
+  "chunks": [
+    {
+      "chunk_id": "cffdb990-f6d8-4b9b-8bec-2884df8fe210",
+      "content": "This is a test document content",
+      "metadata": {
+        "source_filename": "test_upload.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "8c653a9b-eede-4f7b-aad0-1dfba29d6ce8",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-18T18:38:26.872894",
+      "embedding_shape": null
+    }
+  ]
+}

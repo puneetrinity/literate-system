@@ -1,0 +1,108 @@
+{
+  "document": {
+    "id": "41101e9a-7a9e-43d8-8d09-b825c2b9652f",
+    "filename": "ai_research.txt",
+    "content_type": ".txt",
+    "file_size": 1553,
+    "metadata": {
+      "title": "ai_research.txt",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-17T15:07:15.673579",
+    "processed_date": "2025-07-17T15:07:15.673533",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Artificial Intelligence Research Paper Introduction: Artificial Intelligence (AI) has revolutionized various industries including healthcare, finance, and transportation. Machine learning algorithms such as neural networks, decision trees, and support vector machines have shown remarkable performance in pattern recognition and predictive analytics. Deep Learning and Neural Networks: Deep learning, a subset of machine learning, utilizes artificial neural networks with multiple layers to model and understand complex patterns in data. Convolutional Neural Networks (CNNs) excel in image recognition, while Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks are effective for sequential data processing. Natural Language Processing: Natural Language Processing (NLP) enables machines to understand, interpret, and generate human language. Transformer architectures like BERT, GPT, and T5 have achieved state-of-the-art results in tasks such as language translation, sentiment analysis, and text summarization. Applications: AI applications span across autonomous vehicles, medical diagnosis, financial fraud detection, recommendation systems, and intelligent personal assistants. The integration of AI with Internet of Things (IoT) devices has created smart homes and cities. Future Prospects: The future of AI includes developments in quantum computing, explainable AI, edge computing, and artificial general intelligence (AGI). Ethical considerations and responsible AI development remain crucial for societal benefit.",
+  "chunks": [
+    {
+      "chunk_id": "2abc3ef1-e6ff-4a20-9fc1-3bc41797c358",
+      "content": "Artificial Intelligence Research Paper Introduction: Artificial Intelligence (AI) has revolutionized various industries including healthcare, finance, and transportation Machine learning algorithms such as neural networks, decision trees, and support vector machines have shown remarkable performance in pattern recognition and predictive analytics",
+      "metadata": {
+        "source_filename": "ai_research.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "41101e9a-7a9e-43d8-8d09-b825c2b9652f",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:15.674103",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "c0bbf10d-6422-4c8f-9f91-ce656f540906",
+      "content": "ce in pattern recognition and predictive analytics Deep Learning and Neural Networks: Deep learning, a subset of machine learning, utilizes artificial neural networks with multiple layers to model and understand complex patterns in data Convolutional Neural Networks (CNNs) excel in image recognition, while Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks are effective for sequential data processing",
+      "metadata": {
+        "source_filename": "ai_research.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "41101e9a-7a9e-43d8-8d09-b825c2b9652f",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:15.674134",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "9c601c3f-0e95-416a-a0de-2e5b28e65c83",
+      "content": "works are effective for sequential data processing Natural Language Processing: Natural Language Processing (NLP) enables machines to understand, interpret, and generate human language Transformer architectures like BERT, GPT, and T5 have achieved state-of-the-art results in tasks such as language translation, sentiment analysis, and text summarization",
+      "metadata": {
+        "source_filename": "ai_research.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "41101e9a-7a9e-43d8-8d09-b825c2b9652f",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:15.674152",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "f2f24ff3-d37f-43bd-ae97-7e34fe64ed36",
+      "content": "lation, sentiment analysis, and text summarization Applications: AI applications span across autonomous vehicles, medical diagnosis, financial fraud detection, recommendation systems, and intelligent personal assistants The integration of AI with Internet of Things (IoT) devices has created smart homes and cities Future Prospects: The future of AI includes developments in quantum computing, explainable AI, edge computing, and artificial general intelligence (AGI)",
+      "metadata": {
+        "source_filename": "ai_research.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "41101e9a-7a9e-43d8-8d09-b825c2b9652f",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:15.674171",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "8c73454c-15aa-40e6-a912-27eaea1be997",
+      "content": "mputing, and artificial general intelligence (AGI) Ethical considerations and responsible AI development remain crucial for societal benefit",
+      "metadata": {
+        "source_filename": "ai_research.txt",
+        "source_content_type": ".txt",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "41101e9a-7a9e-43d8-8d09-b825c2b9652f",
+      "chunk_index": 4,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T15:07:15.674187",
+      "embedding_shape": null
+    }
+  ]
+}

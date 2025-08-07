@@ -1,0 +1,235 @@
+{
+  "migration_config": {
+    "version": "1.0",
+    "migration_name": "router_consolidation_8_to_3",
+    "description": "Migration from 8-router architecture to consolidated 3-router architecture",
+    "created_at": "2025-01-30T12:00:00Z",
+    "phases": {
+      "phase_1_shadow": {
+        "name": "Shadow Testing",
+        "description": "Run consolidated routers in shadow mode for comparison",
+        "duration_days": 7,
+        "success_criteria": {
+          "error_rate_threshold": 2.0,
+          "latency_degradation_max": 10.0,
+          "min_requests_for_evaluation": 1000
+        },
+        "feature_flags": {
+          "router_consolidation": {
+            "state": "shadow",
+            "rollout_percentage": 0.0,
+            "target_segments": ["internal", "beta"]
+          }
+        }
+      },
+      "phase_2_gradual": {
+        "name": "Gradual Rollout",
+        "description": "Gradually increase traffic to consolidated routers",
+        "duration_days": 14,
+        "rollout_schedule": [
+          {"day": 1, "percentage": 5.0, "segments": ["internal"]},
+          {"day": 3, "percentage": 10.0, "segments": ["internal", "beta"]},
+          {"day": 5, "percentage": 25.0, "segments": ["internal", "beta", "premium"]},
+          {"day": 8, "percentage": 50.0, "segments": ["internal", "beta", "premium"]},
+          {"day": 12, "percentage": 75.0, "segments": ["internal", "beta", "premium", "enterprise"]},
+          {"day": 14, "percentage": 100.0, "segments": ["all"]}
+        ],
+        "success_criteria": {
+          "error_rate_threshold": 1.5,
+          "latency_degradation_max": 5.0,
+          "min_requests_for_evaluation": 2000
+        }
+      },
+      "phase_3_full": {
+        "name": "Full Migration",
+        "description": "Complete migration to consolidated architecture",
+        "duration_days": 7,
+        "success_criteria": {
+          "error_rate_threshold": 1.0,
+          "latency_degradation_max": 0.0,
+          "min_requests_for_evaluation": 5000
+        }
+      },
+      "phase_4_cleanup": {
+        "name": "Legacy Cleanup",
+        "description": "Remove legacy router code and configurations",
+        "duration_days": 3,
+        "tasks": [
+          "Remove legacy router imports",
+          "Clean up unused configuration",
+          "Update documentation",
+          "Archive migration logs"
+        ]
+      }
+    },
+    "monitoring": {
+      "key_metrics": [
+        "request_count_per_architecture",
+        "success_rate_comparison",
+        "average_response_time_comparison",
+        "error_rate_by_router_type",
+        "memory_usage_comparison",
+        "feature_flag_adoption_rate"
+      ],
+      "alert_thresholds": {
+        "error_rate_spike": 5.0,
+        "latency_spike_ms": 5000.0,
+        "success_rate_drop": 10.0
+      },
+      "dashboards": [
+        "migration_overview",
+        "router_performance_comparison",
+        "feature_flag_status",
+        "user_segment_adoption"
+      ]
+    },
+    "rollback_procedures": {
+      "emergency_rollback": {
+        "trigger_conditions": [
+          "error_rate > 10%",
+          "latency_increase > 50%",
+          "success_rate_drop > 20%"
+        ],
+        "steps": [
+          "Set admin_override=false for router_consolidation flag",
+          "Force all traffic to legacy architecture",
+          "Alert engineering team",
+          "Collect diagnostics data"
+        ]
+      },
+      "planned_rollback": {
+        "steps": [
+          "Gradually reduce rollout percentage",
+          "Monitor metrics during rollback",
+          "Document rollback reasons",
+          "Plan improvement iterations"
+        ]
+      }
+    },
+    "testing_scenarios": [
+      {
+        "name": "basic_chat_queries",
+        "description": "Test basic conversational queries",
+        "test_cases": [
+          "Hello, how are you?",
+          "What is artificial intelligence?",
+          "Explain machine learning in simple terms"
+        ]
+      },
+      {
+        "name": "document_search_queries",
+        "description": "Test document search functionality",
+        "test_cases": [
+          "Find information in my uploaded document",
+          "What does my file say about revenue?",
+          "Search my documents for project updates"
+        ]
+      },
+      {
+        "name": "web_search_blocked",
+        "description": "Test web search blocking for enterprise",
+        "test_cases": [
+          "Search web for latest news",
+          "Find current stock prices online",
+          "Look up recent developments"
+        ],
+        "expected_behavior": "blocked_or_manual_consent_required"
+      },
+      {
+        "name": "complex_analysis_queries",
+        "description": "Test complex analysis routing",
+        "test_cases": [
+          "Analyze the pros and cons of remote work",
+          "Compare different project management approaches",
+          "Research best practices for team collaboration"
+        ]
+      },
+      {
+        "name": "code_assistance_queries",
+        "description": "Test code-related queries",
+        "test_cases": [
+          "Help me debug this Python function",
+          "Explain how to implement OAuth in JavaScript",
+          "Review my SQL query for optimization"
+        ]
+      }
+    ],
+    "user_segments": {
+      "internal": {
+        "description": "Internal users and developers",
+        "early_access": true,
+        "rollout_priority": 1
+      },
+      "beta": {
+        "description": "Beta testers who opted in",
+        "early_access": true,
+        "rollout_priority": 2
+      },
+      "premium": {
+        "description": "Premium tier users",
+        "early_access": false,
+        "rollout_priority": 3
+      },
+      "enterprise": {
+        "description": "Enterprise customers",
+        "early_access": false,
+        "rollout_priority": 4,
+        "special_requirements": ["manual_web_search_only", "audit_logging"]
+      },
+      "free": {
+        "description": "Free tier users",
+        "early_access": false,
+        "rollout_priority": 5
+      }
+    },
+    "feature_flag_defaults": {
+      "router_consolidation": {
+        "state": "shadow",
+        "rollout_percentage": 0.0,
+        "error_threshold": 2.0,
+        "latency_threshold_ms": 3000.0,
+        "min_requests_for_evaluation": 100
+      },
+      "unified_intelligent_router": {
+        "state": "shadow",
+        "rollout_percentage": 0.0,
+        "error_threshold": 1.0,
+        "latency_threshold_ms": 2000.0,
+        "min_requests_for_evaluation": 150
+      },
+      "content_type_router": {
+        "state": "shadow",
+        "rollout_percentage": 0.0,
+        "error_threshold": 1.5,
+        "latency_threshold_ms": 1500.0,
+        "min_requests_for_evaluation": 75
+      },
+      "manual_web_search": {
+        "state": "gradual_rollout",
+        "rollout_percentage": 10.0,
+        "error_threshold": 0.5,
+        "latency_threshold_ms": 8000.0,
+        "min_requests_for_evaluation": 25
+      }
+    },
+    "success_metrics": {
+      "performance_targets": {
+        "response_time_improvement": 25.0,
+        "memory_usage_reduction": 30.0,
+        "code_complexity_reduction": 57.0,
+        "maintenance_overhead_reduction": 40.0
+      },
+      "quality_targets": {
+        "error_rate_same_or_better": true,
+        "user_experience_maintained": true,
+        "feature_parity_achieved": true
+      }
+    },
+    "documentation": {
+      "migration_guide": "docs/migration/router_consolidation_guide.md",
+      "architecture_comparison": "docs/architecture/8_vs_3_router_comparison.md",
+      "troubleshooting": "docs/troubleshooting/migration_issues.md",
+      "api_changes": "docs/api/migration_api.md"
+    }
+  }
+}

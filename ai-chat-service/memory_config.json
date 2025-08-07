@@ -1,0 +1,55 @@
+{
+  "memory_system": {
+    "enabled": true,
+    "redis": {
+      "ttl_seconds": 3600,
+      "max_messages_per_session": 100,
+      "max_context_tokens": 2000
+    },
+    "clickhouse": {
+      "enabled": false,
+      "host": "localhost",
+      "port": 9000,
+      "database": "ai_chat_memory",
+      "table_prefix": "conv_"
+    },
+    "bandit": {
+      "exploration_rate": 0.05,
+      "update_interval_seconds": 10,
+      "min_samples_for_learning": 20
+    },
+    "summarization": {
+      "max_concurrent_jobs": 3,
+      "batch_size": 5,
+      "priority_threshold_tokens": 1000,
+      "background_processing": true
+    },
+    "arms": {
+      "quick_context": {
+        "enabled": true,
+        "max_tokens": 500,
+        "memory_depth": 1
+      },
+      "standard_context": {
+        "enabled": true,
+        "max_tokens": 1000,
+        "memory_depth": 3
+      },
+      "deep_context": {
+        "enabled": true,
+        "max_tokens": 2000,
+        "memory_depth": 5
+      },
+      "semantic_search": {
+        "enabled": true,
+        "max_results": 10,
+        "similarity_threshold": 0.7
+      },
+      "user_memory": {
+        "enabled": true,
+        "max_facts": 50,
+        "fact_confidence_threshold": 0.8
+      }
+    }
+  }
+}

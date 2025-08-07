@@ -1,0 +1,176 @@
+{
+  "document": {
+    "id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+    "filename": "Kripal_Singh_Resume.pdf",
+    "content_type": ".pdf",
+    "file_size": 145731,
+    "metadata": {
+      "title": "Kripal_Singh_Resume.pdf",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-21T08:59:30.274792",
+    "processed_date": "2025-07-21T08:59:30.274759",
+    "chunk_count": 0,
+    "status": "completed"
+  },
+  "content": "Kripal Singh Linkedin: http://www.linkedin.com/in/Kripal -singhh/ Email: kripalsingh.work@gmail.com Github: https://github.com/CODEMASTERSTACK Mobile: +91 6397504825 SKILLS Languages : C, C++, Python, Java, SQL, HTML, CSS Tools/Platforms : Tableau, SQL Server Management Studio, Android Studio, MongoDB , Cisco Packet Tracker Soft Skills : Problem -Solving, Team Player, Project Management, Adaptability , Consistent TRAINING Unified Mentor Pvt.Ltd Jun’ 24 – Jul’ 24 Full Stack Developer  Collaborated with a cross -functional team to engineer scalable web applications for real life problem solving.  Developed and deployed 5+ responsive web applications, impro ving performance by 30% using HTML, CSS, JavaScript, and Bootstrap, focusing on clean UI/UX design and optimizing performance for a better user experience. PROJECTS QuizBuster | HTML, CSS, Javascript, API May’ 24  Architected a responsive web application, QuizBuster, enabling students to practice unit -wise MCQs across various subjects, enhancing their learning and exam preparation experience.  Integrated Google Firebase, reducing data retrieval time by 40% for real -time storage and retrieval of quiz data, including dynamic leaderboards displaying top scorers for each unit, fostering a competitive learning environment. Project Link: https://noteslibrary.com/quizbuster/ Suggest Me Movie | HTML, CSS, JavaScript , API Apr’ 25  Engineered a responsive movie recommendation web application, SuggestMeMovie , using HTML, CSS, JavaScript, and TMDB API, enabling users to explore trending films, filter by genres, and view detailed movie information including trailers, cast, and streaming providers.  Implemented advanced UI/UX features such as glass morphism design, AOS animations, debounced search functionality, and caching for optimized performance, resulting in an interactive and user -friendly browsing experience across devices . Project Link: https://suggestmemovie.netlify.app/ Business Analytics Dashboard using Power BI | PowerBI Nov’ 23  Developed and fine -tuned an interactive Power BI dashboard to provide actionable insights to analyze sales, marketing, and revenue trends, providing d ata-driven insights for business decision -making.  Executed diverse visualizations (gauge charts, bar graphs, histograms, and maps) to present complex data in a clear and interactive manner.  Designed KPI tracking and dynamic filtering to monitor business performance metrics and highlight percentage increases in key areas. CERTIFICATES SQL Certificate | Infosys Springboard Nov’ 23 Python | Infosys Springboard Nov’ 23 C++ Programming | Saylor Academy April’ 24 Big Data 101 | IBM Feb’ 25 EDUCATION Lovely Professional University Phagwara, Punjab Bachelor of Computer Application (Big Data Analytics) Aug’ 21 – Present CGPA: 8.64 Gyandeep Shiksha Bharti Mathura, Uttar Pradesh Intermediate Mar’ 22 – May’ 23 Percentage: 81%",
+  "chunks": [
+    {
+      "chunk_id": "95f1f659-e31a-409c-b543-b58c456ac96c",
+      "content": "Kripal Singh Linkedin: http://www linkedin com/in/Kripal -singhh/ Email: kripalsingh work@gmail com Github: https://github com/CODEMASTERSTACK Mobile: +91 6397504825 SKILLS Languages : C, C++, Python, Java, SQL, HTML, CSS Tools/Platforms : Tableau, SQL Server Management Studio, Android Studio, MongoDB , Cisco Packet Tracker Soft Skills : Problem -Solving, Team Player, Project Management, Adaptability , Consistent TRAINING Unified Mentor Pvt",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275155",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "3614429e-1e48-4dab-8eae-23bc8149a323",
+      "content": "ptability , Consistent TRAINING Unified Mentor Pvt Ltd Jun’ 24 – Jul’ 24 Full Stack Developer  Collaborated with a cross -functional team to engineer scalable web applications for real life problem solving  Developed and deployed 5+ responsive web applications, impro ving performance by 30% using HTML, CSS, JavaScript, and Bootstrap, focusing on clean UI/UX design and optimizing performance for a better user experience",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275173",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "ed4863b2-5d0f-43aa-a243-63102f22a8b6",
+      "content": "ptimizing performance for a better user experience PROJECTS QuizBuster | HTML, CSS, Javascript, API May’ 24  Architected a responsive web application, QuizBuster, enabling students to practice unit -wise MCQs across various subjects, enhancing their learning and exam preparation experience",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275183",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "ca9c4821-e96e-48a1-84f3-d9a725d79fa5",
+      "content": "ing their learning and exam preparation experience  Integrated Google Firebase, reducing data retrieval time by 40% for real -time storage and retrieval of quiz data, including dynamic leaderboards displaying top scorers for each unit, fostering a competitive learning environment Project Link: https://noteslibrary",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275193",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "abd8fa4e-8daa-4cc2-9c9d-a90cd2a6a3f0",
+      "content": "ing environment Project Link: https://noteslibrary com/quizbuster/ Suggest Me Movie | HTML, CSS, JavaScript , API Apr’ 25  Engineered a responsive movie recommendation web application, SuggestMeMovie , using HTML, CSS, JavaScript, and TMDB API, enabling users to explore trending films, filter by genres, and view detailed movie information including trailers, cast, and streaming providers",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 4,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275200",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "0c22ece8-bf4a-44dd-a0a6-b5a2befd9c90",
+      "content": "including trailers, cast, and streaming providers  Implemented advanced UI/UX features such as glass morphism design, AOS animations, debounced search functionality, and caching for optimized performance, resulting in an interactive and user -friendly browsing experience across devices Project Link: https://suggestmemovie netlify",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 5,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275216",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "2ba50815-2bf5-4406-a31e-afbd3ba5d871",
+      "content": "vices Project Link: https://suggestmemovie netlify app/ Business Analytics Dashboard using Power BI | PowerBI Nov’ 23  Developed and fine -tuned an interactive Power BI dashboard to provide actionable insights to analyze sales, marketing, and revenue trends, providing d ata-driven insights for business decision -making  Executed diverse visualizations (gauge charts, bar graphs, histograms, and maps) to present complex data in a clear and interactive manner",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 6,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275226",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "5aeffb94-9846-4991-84b7-bc7a63ddaec6",
+      "content": "ent complex data in a clear and interactive manner  Designed KPI tracking and dynamic filtering to monitor business performance metrics and highlight percentage increases in key areas CERTIFICATES SQL Certificate | Infosys Springboard Nov’ 23 Python | Infosys Springboard Nov’ 23 C++ Programming | Saylor Academy April’ 24 Big Data 101 | IBM Feb’ 25 EDUCATION Lovely Professional University Phagwara, Punjab Bachelor of Computer Application (Big Data Analytics) Aug’ 21 – Present CGPA: 8",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 7,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275235",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "8d80e223-9f46-497c-8a05-86f41669f872",
+      "content": "ion (Big Data Analytics) Aug’ 21 – Present CGPA: 8 64 Gyandeep Shiksha Bharti Mathura, Uttar Pradesh Intermediate Mar’ 22 – May’ 23 Percentage: 81%",
+      "metadata": {
+        "source_filename": "Kripal_Singh_Resume.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "6d73d4f0-a4a5-407a-bd32-112c37c172a6",
+      "chunk_index": 8,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-21T08:59:30.275242",
+      "embedding_shape": null
+    }
+  ]
+}

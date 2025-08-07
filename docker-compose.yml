@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  # Redis Cache Service
+  redis:
+    image: redis:7-alpine
+    container_name: unified-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - unified-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Ollama Service (Local Models)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: unified-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - unified-network
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Document Search Service (Ultra Fast Search)
+  document-search:
+    build:
+      context: ./document-search-service
+      dockerfile: Dockerfile
+    container_name: unified-document-search
+    ports:
+      - "8001:8001"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - OLLAMA_HOST=http://ollama:11434
+      - ENVIRONMENT=production
+      - DEBUG=false
+    volumes:
+      - ./document-search-service/data:/app/data
+      - ./document-search-service/indexes:/app/indexes
+    networks:
+      - unified-network
+    depends_on:
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # AI Chat Service (LangGraph + Multi-Agent)
+  ai-chat:
+    build:
+      context: ./ai-chat-service
+      dockerfile: Dockerfile
+    container_name: unified-ai-chat
+    ports:
+      - "8003:8003"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - OLLAMA_HOST=http://ollama:11434
+      - DOCUMENT_SEARCH_URL=http://document-search:8001
+      - ENVIRONMENT=production
+      - DEBUG=false
+      # Add your API keys here
+      - BRAVE_API_KEY=${BRAVE_API_KEY:-}
+      - SCRAPINGBEE_API_KEY=${SCRAPINGBEE_API_KEY:-}
+      # Performance settings
+      - DEFAULT_MONTHLY_BUDGET=50.0
+      - RATE_LIMIT_PER_MINUTE=120
+      - TARGET_RESPONSE_TIME=2.0
+    volumes:
+      - ./ai-chat-service/data:/app/data
+    networks:
+      - unified-network
+    depends_on:
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+      document-search:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Nginx Reverse Proxy (Optional - for production)
+  nginx:
+    image: nginx:alpine
+    container_name: unified-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - unified-network
+    depends_on:
+      - ai-chat
+      - document-search
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  ollama_data:
+
+networks:
+  unified-network:
+    driver: bridge

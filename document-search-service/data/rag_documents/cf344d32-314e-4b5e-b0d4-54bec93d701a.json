@@ -1,0 +1,125 @@
+{
+  "document": {
+    "id": "cf344d32-314e-4b5e-b0d4-54bec93d701a",
+    "filename": "Resume_Sapna.pdf",
+    "content_type": ".pdf",
+    "file_size": 176779,
+    "metadata": {
+      "title": "Resume_Sapna.pdf",
+      "description": "",
+      "tags": [],
+      "chunking_strategy": "semantic",
+      "chunk_size": 512,
+      "chunk_overlap": 50
+    },
+    "upload_date": "2025-07-17T14:04:06.296752",
+    "processed_date": "2025-07-17T14:04:06.296718",
+    "chunk_count": 0,
+    "status": "error"
+  },
+  "content": "Sapna Master of Business Administration 202 3-25 sapna .mba 22161 @iimkashipur.ac.in LinkedIn Mobile: 9306508673 MBA Summer Internship InstaAstro Growth and Partnership 04/2024 – 06/2024 • Identified and evaluated 20+ partnership opportunities within holistic wellness sector, laying groundwork for future collaboration • Collaborated with temples to establish partnerships, enabling the provision of online pooja services through our website. Thi s initiative led to a significant 25% increase in service bookings and strengthening our market presence in spiritual wellness sector • Analy sed user experience feedback calls, categorized them, identified major concerns , and developed targeted solutions for product optimizations, which directly contributing to a 30% increase in product purchases and enhancing market competitiveness Internship CSS Corp Security International Marketing and Business Development 04/2023 – 06/2023 • Generated INR 480000 in revenue by marketing a certificate course to military and security personnel , using target communication • Orchestrated a strategic transformation of email marketing, and optimizing send times, resulting in a 37% surge in open rates • Increased organic search traffic by 50% , by executing technical SEO changes that increased website indexation and visibility • Enhanced conversion rate by 20% using HubSpot CRM by guiding users through effective lead generation to conversion processes Education IIM Kashipur General Management 5.61 CGPA 04/2025 RPS College of Engineering & Technology BBA 71.79% 05/2021 12th CBSE ( Commerce ) 60.60% 05/2017 10th CBSE 60.80% 05/2015 Projects Public Policy Associate Department of Social Welfare Uttarakhand 06/2024 - 02/2025 • Assisted in policy research on pension delays for 50,000+ beneficiaries and proposed an Al -based tracking system for transparency • Evaluated website accessibility issues affecting 1M+ users, identified 14 key issues and collaborated on proposals for UI/UX revamp • Piloted a hybrid coaching framework leveraging govt infrastructure and private institutes provide free coaching to 5000+ student • Improved scholarship outreach by launching 10+ social media campaigns and email alerts, securing 10000+ additional application Sponsorship Market Research Zenminds Sporting Technologies 01/2024 – 03/2024 • Conducted extensive market research on 50+ companies in the gaming, hospital, mattress, and FMCG sectors, enhancing market intelligence and identifying 20 potential high -value sponsors to support strategic outreach efforts and strengthening acquisition • Collaborated with cross -functional teams to assess market trends and competitor activities, identifying 10 new revenue streams and contributing to a 20% increase in overall sponsorship revenue and enhanced the company’s competitive positioning in market Brand Management Bestriptech Solutions Pvt Ltd 09/2022 – 01/2023 • Identified and explored new business ideas, contributing to the development of 4 new product concepts focused on hospitality • Managed 8+ digital campaigns (paid and organic) with a reach of 40k+ , impressions 60k+ focusing on awareness, and positioning • Spearheaded the ‘Walkathon’ event across 5 cities, utilizing email and Digital for awareness, resulting in a turnout of 6000+ participants ( 45% turnout through the digital efforts). This initiative strategically positioned the brand as one stands for hotels Academic Achievements and Certificates • Acquired Google Ads for Beginners certificate through Coursera project, with expertise in Ads dashboards and campaign • Certified in Software Product Management , authorized by the University of Alberta & Coursera, enhancing expertise in product development , marketing analysis, strategic planning, agile methodologies to drive growth and innovation • Diploma in Human Resource Management , focusing on resource management, recruitment strategies , and HR Analytics • Certified in Microsoft Power BI from Udemy ; understood business requirements in a BI context and designed dashboard models usi ng raw data of Zomato , provided by the titan club of IIM Kashipur to support data -driven decision making • Demonstrated academic excellence by achieving the 2nd Rank in the BBA program, out of a cohort of 173 students 2024 2023 2023 2022 2021 Skills SQL | Brand positioning | Product launches | GTM Strategy | Market Research | Competitive Analysis | Product Marketing | Power BI | HubSpot | CRM | Consumer Behaviour | Negotiation | SEO | Customer Acquisition | Business Development | Campaign Management Others Extracurricular • National Semi -finalist in the Sustain -A-Thon by Indian Oil Corporation Limited; developed and presented a business idea and process of converting hazardous CH4 emissions from Oil refineries into artificial diamonds • 1st position in “Pratyaksh 2.0 - Bazaar” an event focusing on Brand development hosted by ECell, IIM Kashipur Hobbies • Represented franchise in table tennis , actively participating to enhance agility and enjoy competitive play • Awarded player of the match in an inter -college Kabaddi tournament featuring over 140 participants",
+  "chunks": [
+    {
+      "chunk_id": "1bfadfc1-4ca0-4bae-89cf-35e09c4ab5fa",
+      "content": "Sapna Master of Business Administration 202 3-25 sapna mba 22161 @iimkashipur ac in LinkedIn Mobile: 9306508673 MBA Summer Internship InstaAstro Growth and Partnership 04/2024 – 06/2024 • Identified and evaluated 20+ partnership opportunities within holistic wellness sector, laying groundwork for future collaboration • Collaborated with temples to establish partnerships, enabling the provision of online pooja services through our website",
+      "metadata": {
+        "source_filename": "Resume_Sapna.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "cf344d32-314e-4b5e-b0d4-54bec93d701a",
+      "chunk_index": 0,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T14:04:06.297168",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "4f641fd7-feaa-47a6-a7ab-bd1eeea9536a",
+      "content": "ision of online pooja services through our website Thi s initiative led to a significant 25% increase in service bookings and strengthening our market presence in spiritual wellness sector • Analy sed user experience feedback calls, categorized them, identified major concerns , and developed targeted solutions for product optimizations, which directly contributing to a 30% increase in product purchases and enhancing market competitiveness Internship CSS Corp Security International Marketing and Business Development 04/2023 – 06/2023 • Generated INR 480000 in revenue by marketing a certificate course to military and security personnel , using target communication • Orchestrated a strategic transformation of email marketing, and optimizing send times, resulting in a 37% surge in open rates • Increased organic search traffic by 50% , by executing technical SEO changes that increased website indexation and visibility • Enhanced conversion rate by 20% using HubSpot CRM by guiding users through effective lead generation to conversion processes Education IIM Kashipur General Management 5",
+      "metadata": {
+        "source_filename": "Resume_Sapna.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "cf344d32-314e-4b5e-b0d4-54bec93d701a",
+      "chunk_index": 1,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T14:04:06.297182",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "5c383815-bd9c-456f-a582-303b573a605b",
+      "content": "cesses Education IIM Kashipur General Management 5 61 CGPA 04/2025 RPS College of Engineering & Technology BBA 71 79% 05/2021 12th CBSE ( Commerce ) 60 60% 05/2017 10th CBSE 60",
+      "metadata": {
+        "source_filename": "Resume_Sapna.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "cf344d32-314e-4b5e-b0d4-54bec93d701a",
+      "chunk_index": 2,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T14:04:06.297192",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "d6cf3f2e-6987-47dc-a8c8-8ab3f3f993e5",
+      "content": "12th CBSE ( Commerce ) 60 60% 05/2017 10th CBSE 60 80% 05/2015 Projects Public Policy Associate Department of Social Welfare Uttarakhand 06/2024 - 02/2025 • Assisted in policy research on pension delays for 50,000+ beneficiaries and proposed an Al -based tracking system for transparency • Evaluated website accessibility issues affecting 1M+ users, identified 14 key issues and collaborated on proposals for UI/UX revamp • Piloted a hybrid coaching framework leveraging govt infrastructure and private institutes provide free coaching to 5000+ student • Improved scholarship outreach by launching 10+ social media campaigns and email alerts, securing 10000+ additional application Sponsorship Market Research Zenminds Sporting Technologies 01/2024 – 03/2024 • Conducted extensive market research on 50+ companies in the gaming, hospital, mattress, and FMCG sectors, enhancing market intelligence and identifying 20 potential high -value sponsors to support strategic outreach efforts and strengthening acquisition • Collaborated with cross -functional teams to assess market trends and competitor activities, identifying 10 new revenue streams and contributing to a 20% increase in overall sponsorship revenue and enhanced the company’s competitive positioning in market Brand Management Bestriptech Solutions Pvt Ltd 09/2022 – 01/2023 • Identified and explored new business ideas, contributing to the development of 4 new product concepts focused on hospitality • Managed 8+ digital campaigns (paid and organic) with a reach of 40k+ , impressions 60k+ focusing on awareness, and positioning • Spearheaded the ‘Walkathon’ event across 5 cities, utilizing email and Digital for awareness, resulting in a turnout of 6000+ participants ( 45% turnout through the digital efforts)",
+      "metadata": {
+        "source_filename": "Resume_Sapna.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "cf344d32-314e-4b5e-b0d4-54bec93d701a",
+      "chunk_index": 3,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T14:04:06.297200",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "224b3515-c031-41a3-8840-73974b43cc70",
+      "content": "cipants ( 45% turnout through the digital efforts) This initiative strategically positioned the brand as one stands for hotels Academic Achievements and Certificates • Acquired Google Ads for Beginners certificate through Coursera project, with expertise in Ads dashboards and campaign • Certified in Software Product Management , authorized by the University of Alberta & Coursera, enhancing expertise in product development , marketing analysis, strategic planning, agile methodologies to drive growth and innovation • Diploma in Human Resource Management , focusing on resource management, recruitment strategies , and HR Analytics • Certified in Microsoft Power BI from Udemy ; understood business requirements in a BI context and designed dashboard models usi ng raw data of Zomato , provided by the titan club of IIM Kashipur to support data -driven decision making • Demonstrated academic excellence by achieving the 2nd Rank in the BBA program, out of a cohort of 173 students 2024 2023 2023 2022 2021 Skills SQL | Brand positioning | Product launches | GTM Strategy | Market Research | Competitive Analysis | Product Marketing | Power BI | HubSpot | CRM | Consumer Behaviour | Negotiation | SEO | Customer Acquisition | Business Development | Campaign Management Others Extracurricular • National Semi -finalist in the Sustain -A-Thon by Indian Oil Corporation Limited; developed and presented a business idea and process of converting hazardous CH4 emissions from Oil refineries into artificial diamonds • 1st position in “Pratyaksh 2",
+      "metadata": {
+        "source_filename": "Resume_Sapna.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "cf344d32-314e-4b5e-b0d4-54bec93d701a",
+      "chunk_index": 4,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T14:04:06.297213",
+      "embedding_shape": null
+    },
+    {
+      "chunk_id": "9b632574-07a9-4308-b676-6b9c057c3629",
+      "content": "artificial diamonds • 1st position in “Pratyaksh 2 0 - Bazaar” an event focusing on Brand development hosted by ECell, IIM Kashipur Hobbies • Represented franchise in table tennis , actively participating to enhance agility and enjoy competitive play • Awarded player of the match in an inter -college Kabaddi tournament featuring over 140 participants",
+      "metadata": {
+        "source_filename": "Resume_Sapna.pdf",
+        "source_content_type": ".pdf",
+        "chunking_strategy": "semantic",
+        "chunk_size": 512,
+        "overlap": 50
+      },
+      "source_document_id": "cf344d32-314e-4b5e-b0d4-54bec93d701a",
+      "chunk_index": 5,
+      "chunk_type": "text",
+      "relevance_score": 0.0,
+      "created_at": "2025-07-17T14:04:06.297223",
+      "embedding_shape": null
+    }
+  ]
+}
