@@ -134,8 +134,11 @@ class RAGEnhancement:
 class RAGOrchestrator:
     """RAG Query Orchestrator with Service Orchestration pattern"""
     
-    def __init__(self, rag_service_url: str = "http://localhost:8001"):
-        self.rag_provider = UltraFastSearchProvider(base_url=rag_service_url)
+    def __init__(self, rag_service_url: Optional[str] = None):
+        from app.core.config import get_settings
+        settings = get_settings()
+        service_url = rag_service_url or settings.document_search_url
+        self.rag_provider = UltraFastSearchProvider(base_url=service_url)
         
         # Circuit breaker configuration
         circuit_config = CircuitBreakerConfig(

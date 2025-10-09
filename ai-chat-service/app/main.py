@@ -24,6 +24,7 @@ from app.api import evaluation_routes as evaluation
 from app.api import models_routes as models
 from app.api import monitoring_routes as monitoring
 from app.api import migration
+from app.api import openai_adapter  # OpenAI-compatible API for LobeChat
 from app.api.security import SecurityMiddleware
 from app.cache.redis_client import CacheManager
 from app.core.config import get_settings
@@ -842,6 +843,9 @@ app.include_router(models.router, prefix="/api/v1/models", tags=["Models"])
 
 # Router Migration API
 app.include_router(migration.router, prefix="/api/v1/migration", tags=["Migration"])
+
+# OpenAI-compatible API for LobeChat integration
+app.include_router(openai_adapter.router, prefix="/api", tags=["OpenAI Compatible"])
 
 # Web Search Enterprise Controls APIs
 from app.api import web_search_consent, web_search_billing, web_search_audit

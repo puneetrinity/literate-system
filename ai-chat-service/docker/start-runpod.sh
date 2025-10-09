@@ -19,7 +19,7 @@ export REDIS_URL="redis://localhost:6379"
 export OLLAMA_HOST="http://localhost:11434"
 export ENVIRONMENT="production"
 export API_HOST="0.0.0.0"
-export API_PORT="8000"
+export API_PORT="8003"
 
 # Start Redis in background first
 echo "📦 Starting Redis..."

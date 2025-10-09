@@ -39,16 +39,19 @@ class UnifiedSearchGraph(BaseGraph):
     - Hybrid search (both)
     """
     
-    def __init__(self, model_manager, cache_manager, document_search_url: str = "http://localhost:8001"):
+    def __init__(self, model_manager, cache_manager, document_search_url: Optional[str] = None):
         super().__init__(GraphType.SEARCH, "unified_search_graph")
         self.model_manager = model_manager
         self.cache_manager = cache_manager
         self.settings = get_settings()
         
+        # Use config if URL not provided
+        search_url = document_search_url or self.settings.document_search_url
+        
         # Initialize components
         self.router = DocumentSearchRouter()
-        self.document_node = DocumentSearchNode(document_search_url)
-        self.upload_node = DocumentUploadNode(document_search_url)
+        self.document_node = DocumentSearchNode(search_url)
+        self.upload_node = DocumentUploadNode(search_url)
         
         # Initialize existing search graph for web search
         self.web_search_graph = SearchGraph(model_manager, cache_manager)

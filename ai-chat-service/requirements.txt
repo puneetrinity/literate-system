@@ -17,7 +17,6 @@ langchain-core==0.2.33
 
 # Redis cache and async support
 redis[hiredis]==5.0.1
-aioredis==2.0.1
 
 # Database and analytics
 clickhouse-driver==0.2.6
@@ -30,15 +29,15 @@ scipy==1.11.4
 scikit-learn==1.3.2
 pandas==2.1.4
 
-# Text processing and embeddings
-sentence-transformers==2.2.2
-transformers==4.36.2
-torch==2.1.1+cpu --index-url https://download.pytorch.org/whl/cpu
-tokenizers==0.15.0
+# Text processing (lighter weight for Railway)
+# sentence-transformers==2.2.2  # Commented out - heavy dependency
+# transformers==4.36.2  # Commented out - heavy dependency
+# torch==2.1.1+cpu --index-url https://download.pytorch.org/whl/cpu  # Commented out - heavy dependency
+# tokenizers==0.15.0  # Commented out - not needed without transformers
 
-# Vector search and similarity
-faiss-cpu==1.7.4
-hnswlib==0.8.0
+# Vector search (optional - only if needed for embeddings)
+# faiss-cpu==1.7.4  # Commented out - heavy dependency
+# hnswlib==0.8.0  # Commented out - optional
 
 # Web scraping and search providers
 beautifulsoup4==4.12.2
@@ -81,7 +80,6 @@ ujson==5.8.0
 pytest==7.4.3
 pytest-asyncio==0.21.1
 pytest-cov==4.1.0
-httpx==0.25.2
 
 # Additional utilities for production
 gunicorn==21.2.0

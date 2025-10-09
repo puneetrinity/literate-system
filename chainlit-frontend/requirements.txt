@@ -1,0 +1,10 @@
+# Chainlit and dependencies
+chainlit==1.0.500
+python-dotenv==1.0.0
+
+# HTTP client for backend API
+httpx==0.25.2
+aiohttp==3.9.1
+
+# Optional: Enhanced features
+pydantic==2.5.0

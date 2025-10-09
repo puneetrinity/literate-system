@@ -18,22 +18,9 @@ env_file = Path(__file__).parent.parent.parent / ".env"
 load_dotenv(env_file)
 
 
-def get_ollama_host() -> str:
-    """Get the correct Ollama host URL with RunPod deployment support."""
-    # Check environment variable first
-    ollama_host = os.getenv("OLLAMA_HOST")
-
-    if ollama_host:
-        # If it's set, use it as-is
-        return ollama_host
-
-    # Check if we're in RunPod environment
-    if os.getenv("RUNPOD_POD_ID") or "runpod" in os.getenv("HOSTNAME", "").lower():
-        # Use localhost since Ollama runs in the same container
-        return "http://localhost:11434"
-
-    # Default to localhost for local development
-    return "http://localhost:11434"
+def get_llm_provider() -> str:
+    """Get the LLM provider type (runpod or ollama)."""
+    return os.getenv("LLM_PROVIDER", "runpod").lower()
 
 
 class Settings(BaseSettings):
@@ -63,8 +50,24 @@ class Settings(BaseSettings):
         )
     )
 
-    # Ollama Configuration
-    ollama_host: str = Field(default_factory=lambda: get_ollama_host())
+    # LLM Provider Configuration
+    llm_provider: str = Field(default_factory=lambda: get_llm_provider())
+
+    # RunPod Configuration
+    runpod_api_key: Optional[str] = Field(
+        default_factory=lambda: os.getenv("RUNPOD_API_KEY")
+    )
+    runpod_endpoint_id: str = Field(
+        default_factory=lambda: os.getenv("RUNPOD_ENDPOINT_ID", "p94hyu5zhxdl82")
+    )
+    runpod_base_url: str = "https://api.runpod.ai/v2"
+    runpod_timeout: int = 60
+    runpod_max_retries: int = 3
+
+    # Legacy Ollama Configuration (for backward compatibility)
+    ollama_host: str = Field(
+        default_factory=lambda: os.getenv("OLLAMA_HOST", "http://localhost:11434")
+    )
     ollama_timeout: int = 60
     ollama_max_retries: int = 3
 
@@ -74,6 +77,11 @@ class Settings(BaseSettings):
     )
     redis_max_connections: int = 20
     redis_timeout: int = 5
+
+    # Document Search Service Configuration
+    document_search_url: str = Field(
+        default_factory=lambda: os.getenv("DOCUMENT_SEARCH_URL", "http://localhost:8001")
+    )
 
     # Model Configuration
     default_model: str = "tinyllama:latest"

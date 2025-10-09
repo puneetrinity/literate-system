@@ -1,6 +1,7 @@
 """
 Simple chat API endpoint that integrates with both systems.
 This provides the backend functionality for the unified chat UI.
+Supports RunPod LLM integration for Railway deployment.
 """
 
 from fastapi import APIRouter, HTTPException, Depends
@@ -10,8 +11,33 @@ import asyncio
 import aiohttp
 import time
 from datetime import datetime
+from app.core.config import get_settings
+from app.services.runpod_llm import RunPodLLMService
 
 router = APIRouter(prefix="/api/v1/chat", tags=["Chat API"])
+
+# Global RunPod service instance (initialized on first use)
+_runpod_service: Optional[RunPodLLMService] = None
+
+
+def get_runpod_service() -> Optional[RunPodLLMService]:
+    """Get or initialize RunPod LLM service"""
+    global _runpod_service
+    settings = get_settings()
+
+    if settings.llm_provider == "runpod" and not _runpod_service:
+        if not settings.runpod_api_key:
+            raise ValueError("RUNPOD_API_KEY is required when LLM_PROVIDER=runpod")
+
+        _runpod_service = RunPodLLMService(
+            api_key=settings.runpod_api_key,
+            endpoint_id=settings.runpod_endpoint_id,
+            base_url=settings.runpod_base_url,
+            timeout=settings.runpod_timeout,
+            max_retries=settings.runpod_max_retries
+        )
+
+    return _runpod_service
 
 class ChatRequest(BaseModel):
     message: str = Field(..., description="The user's message")
@@ -28,7 +54,8 @@ class ChatResponse(BaseModel):
     timestamp: datetime
 
 # Configuration for external services
-IDEAL_OCTO_BASE = "http://localhost:8001"
+settings = get_settings()
+DOCUMENT_SEARCH_BASE = settings.document_search_url
 SEARCH_TIMEOUT = 30.0
 
 @router.post("/unified", response_model=ChatResponse)
@@ -102,7 +129,8 @@ async def perform_search(query: str, max_results: int = 10) -> Dict[str, Any]:
     """
     search_data = {
         "query": query,
-        "num_results": max_results
+        "num_results": max_results,
+        "search_type": "documents"
     }
     
     timeout = aiohttp.ClientTimeout(total=SEARCH_TIMEOUT)
@@ -110,7 +138,7 @@ async def perform_search(query: str, max_results: int = 10) -> Dict[str, Any]:
     async with aiohttp.ClientSession(timeout=timeout) as session:
         try:
             async with session.post(
-                f"{IDEAL_OCTO_BASE}/search",
+                f"{DOCUMENT_SEARCH_BASE}/api/v2/unified/search",
                 json=search_data
             ) as response:
                 if response.status == 200:
@@ -197,34 +225,65 @@ def generate_search_response(search_results: Dict[str, Any], mode: str) -> str:
     
     return response
 
-def generate_chat_response(message: str, mode: str) -> str:
+async def generate_chat_response(message: str, mode: str) -> str:
     """
-    Generate a conversational response without search results.
-    This is a simplified implementation - in production, this would connect to
-    the actual AI conversation system.
+    Generate a conversational response using RunPod LLM or fallback responses.
     """
+    settings = get_settings()
+
+    # Try to use RunPod LLM if configured
+    if settings.llm_provider == "runpod":
+        try:
+            runpod_service = get_runpod_service()
+            if runpod_service:
+                # Create a prompt based on mode
+                system_prompt = get_system_prompt_for_mode(mode)
+                full_prompt = f"{system_prompt}\n\nUser: {message}\n\nAssistant:"
+
+                result = await runpod_service.generate(
+                    prompt=full_prompt,
+                    max_tokens=300,
+                    temperature=0.7
+                )
+
+                if result.get("success"):
+                    return result.get("text", "").strip()
+        except Exception as e:
+            print(f"RunPod LLM failed, using fallback: {e}")
+
+    # Fallback to simple keyword-based responses
     message_lower = message.lower()
-    
-    # Simple keyword-based responses for demonstration
+
     if any(word in message_lower for word in ["hello", "hi", "hey"]):
         return "Hello! I'm your AI assistant. I can help you search through documents, answer questions, and provide research assistance. What would you like to know?"
-    
+
     elif any(word in message_lower for word in ["help", "what can you do"]):
         return """I can help you in several ways:
 
 🔍 **Search**: Find information in documents quickly
-💬 **Chat**: Have conversations and answer questions  
+💬 **Chat**: Have conversations and answer questions
 📚 **Research**: Conduct comprehensive research analysis
 🚀 **Unified**: Combine search with intelligent responses
 
 Just ask me anything, and I'll do my best to help!"""
-    
+
     elif any(word in message_lower for word in ["how are you", "how do you work"]):
-        return "I'm doing great! I work by combining ultra-fast document search with AI conversation capabilities. I can search through vast amounts of information in milliseconds and provide intelligent, contextual responses."
-    
+        return "I'm doing great! I work by combining ultra-fast document search with AI conversation capabilities powered by RunPod. I can search through vast amounts of information in milliseconds and provide intelligent, contextual responses."
+
     else:
         # Generic response for unknown queries
         return f"That's an interesting question about '{message}'. While I don't have specific information readily available, I can search through documents or help you explore this topic further. Would you like me to search for relevant information?"
+
+
+def get_system_prompt_for_mode(mode: str) -> str:
+    """Get system prompt based on chat mode"""
+    prompts = {
+        "chat": "You are a helpful AI assistant. Provide clear, concise, and accurate responses to user questions.",
+        "unified": "You are a helpful AI assistant with access to document search. Provide informative responses and suggest searching for detailed information when appropriate.",
+        "research": "You are a research assistant. Provide detailed, analytical responses with a focus on accuracy and thoroughness.",
+        "search": "You are a search assistant. Help users formulate effective search queries and understand search results."
+    }
+    return prompts.get(mode, prompts["chat"])
 
 def enhance_with_chat_context(search_content: str, original_message: str, mode: str) -> str:
     """

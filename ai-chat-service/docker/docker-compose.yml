@@ -9,7 +9,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     ports:
-      - "8000:8000"
+      - "8003:8003"
     environment:
       - ENVIRONMENT=testing
       - DEBUG=true
@@ -28,12 +28,12 @@ services:
       - ai-search-net
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
       interval: 30s
       timeout: 10s
       retries: 3
     entrypoint: ["/bin/sh", "/app/docker/wait-for-ollama.sh"]
-    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8003", "--reload"]
 
   # Redis for hot caching
   redis:
