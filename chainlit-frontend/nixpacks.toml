@@ -8,4 +8,4 @@ cmds = ["pip install --no-cache-dir -r requirements.txt"]
 cmds = []
 
 [start]
-cmd = "chainlit run app.py --host 0.0.0.0 --port ${PORT:-8080} --headless"
+cmd = "rm -rf /app/.chainlit && chainlit run app.py --host 0.0.0.0 --port ${PORT:-8080} --headless"
