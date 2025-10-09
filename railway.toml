@@ -1,0 +1,23 @@
+# Railway Configuration for Unified AI System
+# This file helps Railway understand the monorepo structure
+
+# Note: Railway will ignore this file if you set the root directory in the dashboard
+# Instead, create separate services in Railway with different root directories:
+#
+# Service 1: AI Chat Service
+#   Root Directory: ai-chat-service
+#
+# Service 2: Chainlit Frontend
+#   Root Directory: chainlit-frontend
+#
+# Service 3: Document Search Service (Optional)
+#   Root Directory: document-search-service
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+numReplicas = 1
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
