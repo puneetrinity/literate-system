@@ -1,0 +1,32 @@
+# RunPod Serverless Dockerfile for AI Chat Service
+FROM runpod/base:0.4.0-cuda11.8.0
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    PORT=8000 \
+    LLM_PROVIDER=runpod
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install
+COPY requirements.txt ./
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir runpod
+
+# Copy application code
+COPY app ./app
+
+# Copy RunPod handler
+COPY runpod_handler.py ./
+
+# RunPod serverless entrypoint
+CMD ["python", "-u", "runpod_handler.py"]
